@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: darthjee/circleci_dr_mario-base:0.0.1
+        environment:
+          SHERIDAN_POSTGRES_HOST: postgres
+          SHERIDAN_POSTGRES_PORT: 5432
+          SHERIDAN_POSTGRES_USER: dr_mario
+          SHERIDAN_POSTGRES_NAME: dr_mario
+          SHERIDAN_POSTGRES_PASSWORD: dr_mario
+      - image: circleci/postgres
+        name: postgres
+        environment:
+          POSTGRES_USER: dr_mario
+          POSTGRES_PASSWORD: dr_mario
+          POSTGRES_DB: dr_mario_test
+    steps:
+      - checkout
+      - run:
+          name: Set folder
+          command: cp source/* source/.??* ./ -r; rm source -rf
+      - run:
+          name: Bundle Install
+          command: bundle install
+      - run:
+          name: Migrate
+          command: RAILS_ENV=test bundle exec rake db:schema:load
+      - run:
+          name: Bower Install
+          command: bundle exec rake bower:install
+      - run:
+          name: RSpec
+          command: bundle exec rspec
+      - run:
+          name: Rubocop
+          command: rubocop

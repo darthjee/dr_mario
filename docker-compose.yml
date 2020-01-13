@@ -1,0 +1,55 @@
+version: '3'
+services:
+  dr_mario_postgres:
+    image: postgres:9.5
+    container_name: dr_mario_postgres
+    env_file: .env
+    environment:
+      POSTGRES_USER: dr_mario
+      POSTGRES_PASSWORD: dr_mario
+    ports:
+      - 127.0.0.1:$SHERIDAN_POSTGRES_PORT:5432
+
+  #################### Base  ####################
+
+  base: &base
+    image: dr_mario
+    volumes:
+      - ./source:/home/app/app
+    links:
+      - dr_mario_postgres:postgres
+    env_file: .env
+
+
+  base_build:
+    <<: *base
+    build: .
+    command: echo done
+
+  #################### CONTAINERS ####################
+
+  dr_mario_app:
+    <<: *base
+    container_name: dr_mario_app
+    command: /bin/bash bin/server.sh
+    depends_on: [base_build]
+    ports:
+      - 127.0.0.1:3000:3000
+    environment:
+      - RAILS_ENV=development
+      - SHERIDAN_POSTGRES_PORT=5432
+
+  dr_mario_tests:
+    <<: *base
+    container_name: dr_mario_tests
+    command: /bin/bash bin/tests.sh
+    depends_on: [base_build]
+    environment:
+      - RAILS_ENV=test
+
+  dr_mario_root:
+    <<: *base
+    user: root
+    container_name: dr_mario_root
+    command: /bin/bash
+    depends_on: [base_build]
