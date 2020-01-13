@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: dr_mario
       POSTGRES_PASSWORD: dr_mario
     ports:
-      - 127.0.0.1:$SHERIDAN_POSTGRES_PORT:5432
+      - 127.0.0.1:$DR_MARIO_POSTGRES_PORT:5432
 
   #################### Base  ####################
 
@@ -37,7 +37,7 @@ services:
       - 127.0.0.1:3000:3000
     environment:
       - RAILS_ENV=development
-      - SHERIDAN_POSTGRES_PORT=5432
+      - DR_MARIO_POSTGRES_PORT=5432
 
   dr_mario_tests:
     <<: *base
