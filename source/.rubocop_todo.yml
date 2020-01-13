@@ -45,8 +45,3 @@ Style/StringLiterals:
     - 'config/environments/production.rb'
     - 'config/puma.rb'
 
-# Offense count: 10
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 112
