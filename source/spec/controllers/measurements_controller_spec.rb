@@ -76,7 +76,9 @@ describe MeasurementsController do
         get :show, params: { user_id: user_id, id: :id }
       end
 
-      it { expect(response).to redirect_to("#/users/#{user_id}/measurements/id") }
+      it do
+        expect(response).to redirect_to("#/users/#{user_id}/measurements/id")
+      end
     end
   end
 
