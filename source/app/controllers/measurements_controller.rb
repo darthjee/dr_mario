@@ -5,4 +5,3 @@ class MeasurementsController < ApplicationController
 
   resource_for :measurement
 end
-
