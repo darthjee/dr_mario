@@ -84,10 +84,16 @@ describe MeasurementsController do
 
   describe 'POST create' do
     context 'when requesting json format' do
-      let(:payload)     { { name: 'My Measurement' } }
       let(:measurement) { Measurement.last }
       let(:parameters) do
         { user_id: user_id, format: :json, measurement: payload }
+      end
+      let(:payload) do
+        {
+          glicemy: 100,
+          date: '2020-01-15',
+          time: '10:44:55'
+        }
       end
 
       let(:expected_json) { measurement.to_json }
