@@ -110,13 +110,19 @@ describe MeasurementsController do
         expect(response.body).to eq(expected_json)
       end
 
-      context 'when name is nil' do
-        let(:payload) { { name: nil } }
+      context 'when glicemy is nil' do
+        let(:measurement) { Measurement.new(payload) }
+        let(:payload) do
+          {
+            glicemy: nil,
+            date: '2020-01-15',
+            time: '10:44:55'
+          }
+        end
 
         it do
           expect { post :create, params: parameters }
-            .to change(Measurement, :count)
-            .by(1)
+            .not_to change(Measurement, :count)
         end
 
         it 'returns created measurement' do
@@ -126,20 +132,25 @@ describe MeasurementsController do
         end
       end
 
-      context 'when payload contains code' do
-        let(:payload) { { code: my_code } }
-        let(:my_code) { 'my code' }
+      context 'when date and time are nil' do
+        let(:measurement) { Measurement.new(payload) }
+        let(:payload) do
+          {
+            glicemy: 120,
+            date: nil,
+            time: nil,
+          }
+        end
 
         it do
           expect { post :create, params: parameters }
-            .to change(Measurement, :count)
-            .by(1)
+            .not_to change(Measurement, :count)
         end
 
-        it 'does not accept the code' do
+        it 'returns created measurement' do
           post :create, params: parameters
 
-          expect(response.body).not_to match(my_code)
+          expect(response.body).to eq(expected_json)
         end
       end
     end

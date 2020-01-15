@@ -3,5 +3,19 @@
 require 'spec_helper'
 
 RSpec.describe Measurement, type: :model do
-  xit 'implement later'
+  subject(:measurement) { build(:measurement) }
+
+  describe 'validations' do
+    it do
+      expect(measurement).to validate_presence_of(:glicemy)
+    end
+
+    it do
+      expect(measurement).to validate_presence_of(:date)
+    end
+
+    it do
+      expect(measurement).to validate_presence_of(:time)
+    end
+  end
 end
