@@ -12,6 +12,7 @@ require 'zonebie'
 require 'webmock/rspec'
 require 'factory_bot'
 require 'database_cleaner'
+require 'shoulda-matchers'
 
 # assign a random Timezone to help find problems
 Zonebie.set_random_timezone
@@ -127,3 +128,10 @@ end
 
 RSpec::Matchers.define_negated_matcher :not_raise_error, :raise_error
 RSpec::Matchers.define_negated_matcher :not_change, :change
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
