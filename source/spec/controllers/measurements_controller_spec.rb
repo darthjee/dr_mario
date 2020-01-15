@@ -17,6 +17,8 @@ describe MeasurementsController do
         get :index, params: { user_id: user_id, format: :json }
       end
 
+      it { expect(response).to be_successful }
+
       it 'returns measurements serialized' do
         expect(response.body).to eq(expected_json)
       end
@@ -26,6 +28,8 @@ describe MeasurementsController do
       before do
         get :index, params: { user_id: user_id, format: :html, ajax: true }
       end
+
+      it { expect(response).to be_successful }
 
       it { expect(response).to render_template('measurements/index') }
     end
@@ -56,6 +60,8 @@ describe MeasurementsController do
         get :show, params: parameters
       end
 
+      it { expect(response).to be_successful }
+
       it 'returns measurements serialized' do
         expect(response.body).to eq(expected_json)
       end
@@ -67,6 +73,8 @@ describe MeasurementsController do
       end
 
       before { get :show, params: parameters }
+
+      it { expect(response).to be_successful }
 
       it { expect(response).to render_template('measurements/show') }
     end
@@ -99,6 +107,12 @@ describe MeasurementsController do
       let(:expected_json) { measurement.to_json }
 
       it do
+        post :create, params: parameters
+
+        expect(response).to be_successful
+      end
+
+      it do
         expect { post :create, params: parameters }
           .to change(Measurement, :count)
           .by(1)
@@ -121,6 +135,12 @@ describe MeasurementsController do
         end
 
         it do
+          post :create, params: parameters
+
+          expect(response).not_to be_successful
+        end
+
+        it do
           expect { post :create, params: parameters }
             .not_to change(Measurement, :count)
         end
@@ -140,6 +160,11 @@ describe MeasurementsController do
             date: nil,
             time: nil,
           }
+        end
+
+        it do
+          post :create, params: parameters
+          expect(response).not_to be_successful
         end
 
         it do
