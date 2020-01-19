@@ -4,6 +4,9 @@ require 'spec_helper'
 
 describe MeasurementsController do
   let(:user_id) { 10 }
+  let(:expected_json) do
+    Measurement::Decorator.new(expected_object).to_json
+  end
 
   describe 'GET index' do
     render_views
@@ -11,7 +14,7 @@ describe MeasurementsController do
     before { create_list(:measurement, 1) }
 
     context 'when requesting json' do
-      let(:expected_json) { Measurement.all.to_json }
+      let(:expected_object) { Measurement.all }
 
       before do
         get :index, params: { user_id: user_id, format: :json }
@@ -54,7 +57,7 @@ describe MeasurementsController do
         { id: measurement_id, user_id: user_id, format: :json }
       end
 
-      let(:expected_json) { measurement.to_json }
+      let(:expected_object) { measurement }
 
       before do
         get :show, params: parameters
@@ -104,7 +107,7 @@ describe MeasurementsController do
         }
       end
 
-      let(:expected_json) { measurement.to_json }
+      let(:expected_object) { measurement }
 
       it do
         post :create, params: parameters
@@ -145,7 +148,7 @@ describe MeasurementsController do
             .not_to change(Measurement, :count)
         end
 
-        it 'returns created measurement' do
+        it 'returns measurement with errors' do
           post :create, params: parameters
 
           expect(response.body).to eq(expected_json)
@@ -172,7 +175,7 @@ describe MeasurementsController do
             .not_to change(Measurement, :count)
         end
 
-        it 'returns created measurement' do
+        it 'returns measurement with errors' do
           post :create, params: parameters
 
           expect(response.body).to eq(expected_json)
