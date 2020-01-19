@@ -8,6 +8,28 @@ describe MeasurementsController do
     Measurement::Decorator.new(expected_object).to_json
   end
 
+  describe 'GET new' do
+    render_views
+
+    context 'when requesting html and ajax is true' do
+      before do
+        get :new, params: { user_id: user_id, format: :html, ajax: true }
+      end
+
+      it { expect(response).to be_successful }
+
+      it { expect(response).to render_template('measurements/new') }
+    end
+
+    context 'when requesting html and ajax is false' do
+      before do
+        get :new, params: { user_id: user_id }
+      end
+
+      it { expect(response).to redirect_to("#/users/#{user_id}/measurements/new") }
+    end
+  end
+
   describe 'GET index' do
     render_views
 

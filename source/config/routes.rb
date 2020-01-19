@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   get '/' => 'home#show', as: :home
 
   resources :users, only: [] do
-    resources :measurements, only: %i[index show create]
+    resources :measurements, only: %i[index show create new]
   end
 end

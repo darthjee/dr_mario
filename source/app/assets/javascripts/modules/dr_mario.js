@@ -30,6 +30,7 @@
     }, {
       routes: [
         '/users/:user_id/measurements',
+        '/users/:user_id/measurements/new',
       ]
     }];
     provider.$get().bindRoutes();
