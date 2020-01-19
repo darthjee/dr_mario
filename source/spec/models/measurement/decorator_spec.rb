@@ -5,11 +5,13 @@ require 'spec_helper'
 describe Measurement::Decorator do
   subject(:decorator) { described_class.new(object) }
 
+  let(:attributes)    { %w[id glicemy time date] }
+
   describe '#to_json' do
     context 'when object is one entity' do
       let(:object) { create(:measurement) }
       let(:expected_json) do
-        object.as_json.slice(*%w[id glicemy time date]).to_json
+        object.as_json.slice(*attributes).to_json
       end
 
       it 'returns expected json' do
@@ -19,10 +21,11 @@ describe Measurement::Decorator do
 
     context 'when object is invalid' do
       let(:object) { build(:measurement, glicemy: nil) }
-      let(:expected_errors) { {glicemy: ["can't be blank"]} }
+      let(:expected_errors) { { glicemy: ["can't be blank"] } }
       let(:expected_json) do
-        object.as_json
-          .slice(*%w[id glicemy time date])
+        object
+          .as_json
+          .slice(*attributes)
           .merge(errors: expected_errors).to_json
       end
 
@@ -35,11 +38,11 @@ describe Measurement::Decorator do
       let(:object) { Measurement.all }
       let(:expected_json) do
         object.map do |measurement|
-          measurement.as_json.slice(*%w[id glicemy time date])
+          measurement.as_json.slice(*attributes)
         end.to_json
       end
 
-      before { 3.times { create(:measurement) } }
+      before { create_list(:measurement, 3) }
 
       it 'returns expected json' do
         expect(decorator.to_json).to eq(expected_json)
@@ -58,13 +61,14 @@ describe Measurement::Decorator do
 
       let(:expected_json) do
         object.map do |measurement|
-          measurement.as_json
-            .slice(*%w[id glicemy time date])
+          measurement
+            .as_json
+            .slice(*attributes)
             .merge(errors: expected_errors)
         end.to_json
       end
 
-      before { 2.times { create(:measurement) } }
+      before { create_list(:measurement, 2) }
 
       it 'returns expected json' do
         expect(decorator.to_json).to eq(expected_json)
