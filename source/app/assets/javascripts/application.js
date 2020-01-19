@@ -10,7 +10,16 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
+//= require underscore
+//= require angular/angular
+//= require angular-route/angular-route
+//= require kanto/kanto
+//= require cyberhawk/cyberhawk
+//= require querystring
+//= require bootstrap
+//= require modules/dr_mario
+//= require_tree ./modules
 //= require rails-ujs
-//= require activestorage
 //= require turbolinks
 //= require_tree .
