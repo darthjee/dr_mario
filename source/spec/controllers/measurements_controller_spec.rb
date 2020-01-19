@@ -158,7 +158,7 @@ describe MeasurementsController do
           {
             glicemy: 120,
             date: nil,
-            time: nil,
+            time: nil
           }
         end
 
