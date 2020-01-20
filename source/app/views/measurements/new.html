@@ -9,6 +9,6 @@
   <dd><input name="time" value="{{mc.data.time}}"></dd>
   <input type="checkbox" name="current-time"
          ng-model="mc.autoUpdate"
-         ng-change="mc._stopClock()">
+         ng-change="mc.toggleClock()">
   <label for="current-time">Horario atual</label>
 </form>
