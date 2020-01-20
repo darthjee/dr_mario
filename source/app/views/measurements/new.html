@@ -1,1 +1,14 @@
-NEW
+<form>
+  <dt><label for="glicemy">Glicemia</dt>
+  <dd><input name="glicemy" value="{{mc.data.glicemy}}" type="number"></dd>
+
+  <dt><label for="date">Dia</dt>
+  <dd><input name="date" value="{{mc.data.date}}"></dd>
+
+  <dt><label for="time">Hora</dt>
+  <dd><input name="time" value="{{mc.data.time}}"></dd>
+  <input type="checkbox" name="current-time"
+         ng-model="mc.autoUpdate"
+         ng-change="mc._stopClock()">
+  <label for="current-time">Horario atual</label>
+</form>

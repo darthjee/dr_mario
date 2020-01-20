@@ -3,7 +3,8 @@
     'global',
     'cyberhawk',
     'kanto',
-    'home'
+    'home',
+    'measurement'
   ]);
 
   module.config(['$httpProvider', function($httpProvider) {
@@ -29,8 +30,15 @@
       }
     }, {
       routes: [
-        '/users/:user_id/measurements',
-        '/users/:user_id/measurements/new',
+        '/users/:user_id/measurements/new'
+      ],
+      config: {
+        controller: 'Measurement.Controller',
+        controllerAs: 'mc'
+      }
+    },{
+      routes: [
+        '/users/:user_id/measurements'
       ]
     }];
     provider.$get().bindRoutes();
