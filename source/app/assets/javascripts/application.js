@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require js-cookie
 //= require underscore
 //= require angular/angular
 //= require angular-route/angular-route
