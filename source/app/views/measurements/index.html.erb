@@ -1,0 +1,13 @@
+<table>
+  <tr>
+    <th>Glicemia</th>
+    <th>Dia</th>
+    <th>Hora</th>
+  </tr>
+  <tr ng-repeat="measurement in gnc.data">
+    <td>{{measurement.glicemy}}</td>
+    <td>{{measurement.date}}</td>
+    <td>{{measurement.time}}</td>
+  </tr>
+</table>
+<a href="new">Nova medida</a>
