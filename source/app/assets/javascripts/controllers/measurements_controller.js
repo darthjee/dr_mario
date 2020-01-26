@@ -49,12 +49,12 @@
       date.getFullYear(),
       date.getMonth() + 1,
       date.getDate(),
-    ].join("-").replace(/\b(\d)\b/g, "0$1")
+    ].join("-").replace(/\b(\d)\b/g, "0$1");
     this.data.time = [
       date.getHours(),
       date.getMinutes(),
       date.getSeconds()
-    ].join(":").replace(/\b(\d)\b/g, "0$1")
+    ].join(":").replace(/\b(\d)\b/g, "0$1");
   };
 
   app.controller('Measurement.Controller', [
