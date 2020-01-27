@@ -29,6 +29,7 @@ module ApplicationHelper
 
   def respond_to?(method)
     return true if Path::SafePath.new(self, method).does_respond_to?
+
     super
   end
 end
