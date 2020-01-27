@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th>Glicemia</th>
+    <th>Dia</th>
+    <th>Hora</th>
+  </tr>
+  <tr ng-repeat="measurement in gnc.data">
+    <td>{{measurement.glicemy}}</td>
+    <td>{{measurement.date}}</td>
+    <td>{{measurement.time}}</td>
+  </tr>
+</table>
+<%= angular_safe_link_to(:new_user_measurement) do %>
+  Nova Medida
+<% end %>
