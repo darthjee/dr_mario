@@ -10,4 +10,6 @@
     <td>{{measurement.time}}</td>
   </tr>
 </table>
-<a href="new">Nova medida</a>
+<%= angular_safe_link_to(:new_user_measurement) do %>
+  Nova Medida
+<% end %>
