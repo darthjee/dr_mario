@@ -20,5 +20,8 @@ module DrMario
     # files in that directory are automatically
     # loaded after loading the framework and any gems in
     # your application.
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components")
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components", "bootstrap-sass", "assets", "fonts", "bootstrap")
+    config.assets.paths << Rails.root.join("vendor","assets","bower_components", "bootstrap-sass", "assets", "javascripts")
   end
 end
