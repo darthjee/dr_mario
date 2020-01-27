@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Path
   class SafePath
     attr_reader :controller, :method
@@ -10,21 +12,17 @@ module Path
     end
 
     def call_missing(*args)
-      if MATCHER =~ method && does_respond_to?
-        safe_path(*args)
-      end
+      safe_path(*args) if MATCHER =~ method && does_respond_to?
     end
 
     def does_respond_to?
-      if MATCHER =~ method
-        controller.respond_to?(path_method)
-      end
+      controller.respond_to?(path_method) if MATCHER.match?(method)
     end
 
     private
 
     def path_method
-      @path_method ||= MATCHER.match(method)[1]+'_path'
+      @path_method ||= MATCHER.match(method)[1] + '_path'
     end
 
     def safe_path(args)

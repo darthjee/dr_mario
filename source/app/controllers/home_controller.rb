@@ -3,7 +3,5 @@
 class HomeController < ApplicationController
   include OnePageApplication
 
-  def show
-  end
+  def show; end
 end
-
