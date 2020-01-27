@@ -4,7 +4,7 @@ module Path
   class SafePath
     attr_reader :controller, :method
 
-    MATCHER = /^(\w*)_safe_path$/
+    MATCHER = /^(\w*)_safe_path$/.freeze
 
     def initialize(controller, method)
       @controller = controller
