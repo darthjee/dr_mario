@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: darthjee/circleci_dr_mario-base:0.0.1
+      - image: darthjee/circleci_dr_mario-base:0.0.2
         environment:
           DR_MARIO_POSTGRES_HOST: postgres
           DR_MARIO_POSTGRES_PORT: 5432
