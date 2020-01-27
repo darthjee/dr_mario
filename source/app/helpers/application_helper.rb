@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Style/MissingRespondToMissing
 module ApplicationHelper
   def angular_link_to(text, path, *args)
     link_to(text, angular_path_to(path), *args)
@@ -8,7 +9,9 @@ module ApplicationHelper
   def angular_safe_link_to(path_method, path_args = {}, *args)
     link_to(
       angular_path_to(
-        public_send(path_method.to_s.gsub(/(_path)?$/, '_safe_path').to_s, path_args)
+        public_send(
+          path_method.to_s.gsub(/(_path)?$/, '_safe_path').to_s, path_args
+        )
       ),
       *args
     ) do
@@ -29,3 +32,4 @@ module ApplicationHelper
     super
   end
 end
+# rubocop:enable Style/MissingRespondToMissing

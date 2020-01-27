@@ -26,7 +26,9 @@ describe MeasurementsController do
         get :new, params: { user_id: user_id }
       end
 
-      it { expect(response).to redirect_to("#/users/#{user_id}/measurements/new") }
+      it do
+        expect(response).to redirect_to("#/users/#{user_id}/measurements/new")
+      end
     end
   end
 
