@@ -1,26 +1,35 @@
-<form>
+<form class="form-horizontal">
   <div class="form-group">
-    <label for="glicemy">Glicemia</label>
-    <input name="glicemy" id="glicemy" ng-model="mc.data.glicemy" type="number">
+    <label for="glicemy" class="col-sm-1 control-label">Glicemia</label>
+    <input name="glicemy"
+           id="glicemy"
+           class="col-sm-1"
+           ng-model="mc.data.glicemy"
+           type="number">
   </div>
 
   <div class="form-group">
-    <label for="date">Dia</label>
-    <input name="date" id="date" ng-model="mc.data.date">
+    <label for="date" class="col-sm-1 control-label">Dia</label>
+    <input name="date"
+           id="date"
+           class="col-sm-1"
+           ng-model="mc.data.date">
   </div>
 
   <div class="form-group">
-    <label for="time">Hora</label>
-    <input name="time" id="time" ng-model="mc.data.time">
+    <label for="time" class="col-sm-1 control-label">Hora</label>
+    <input name="time" id="time" class="col-sm-1" ng-model="mc.data.time">
   </div>
 
   <div class="checkbox">
-    <input type="checkbox" name="current_time" id="current_time"
-                                               ng-model="mc.autoUpdate"
-                                               ng-change="mc.toggleClock()">
-    <label for="current_time">
-      Horario atual
-    </label>
+    <div class="col-sm-offset-1 col-sm-1">
+      <input type="checkbox" name="current_time" id="current_time" class="col-sm-1"
+                                                                   ng-model="mc.autoUpdate"
+                                                                   ng-change="mc.toggleClock()">
+      <label for="current_time" class="col-sm-1 control-label">
+        Horario atual
+      </label>
+    </div>
   </div>
 
   <div class="form-group">
