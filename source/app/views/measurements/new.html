@@ -1,15 +1,29 @@
 <form>
-  <dt><label for="glicemy">Glicemia</dt>
-  <dd><input name="glicemy" id="glicemy" ng-model="mc.data.glicemy" type="number"></dd>
+  <div class="form-group">
+    <label for="glicemy">Glicemia</label>
+    <input name="glicemy" id="glicemy" ng-model="mc.data.glicemy" type="number">
+  </div>
 
-  <dt><label for="date">Dia</dt>
-  <dd><input name="date" id="date" ng-model="mc.data.date"></dd>
+  <div class="form-group">
+    <label for="date">Dia</label>
+    <input name="date" id="date" ng-model="mc.data.date">
+  </div>
 
-  <dt><label for="time">Hora</dt>
-  <dd><input name="time" id="time" ng-model="mc.data.time"></dd>
-  <input type="checkbox" name="current_time" id="current_time"
-         ng-model="mc.autoUpdate"
-         ng-change="mc.toggleClock()">
-  <label for="current_time">Horario atual</label>
-  <button ng-click="mc.save()">Salvar</button>
+  <div class="form-group">
+    <label for="time">Hora</label>
+    <input name="time" id="time" ng-model="mc.data.time">
+  </div>
+
+  <div class="checkbox">
+    <input type="checkbox" name="current_time" id="current_time"
+                                               ng-model="mc.autoUpdate"
+                                               ng-change="mc.toggleClock()">
+    <label for="current_time">
+      Horario atual
+    </label>
+  </div>
+
+  <div class="form-group">
+    <button ng-click="mc.save()" type"submit">Salvar</button>
+  </div>
 </form>
