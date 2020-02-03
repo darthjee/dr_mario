@@ -36,10 +36,16 @@
         controller: 'Measurement.FormController',
         controllerAs: 'mc'
       }
-    },{
+    }, {
       routes: [
         '/users/:user_id/measurements'
-      ]
+      ],
+      config: {
+        controller: 'Measurement.IndexController',
+        controllerAs: 'mc'
+      }
+    },{
+      routes: []
     }];
     provider.$get().bindRoutes();
   }]);
