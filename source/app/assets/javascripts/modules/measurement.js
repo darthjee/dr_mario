@@ -2,6 +2,6 @@
   window.Measurement = {};
 
   angular.module('measurement', [
-    'measurement/controller'
+    'measurement/form_controller'
   ])
 }(window.angular));

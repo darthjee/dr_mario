@@ -1,11 +1,11 @@
 (function(_, angular, Cyberhawk, Measurement) {
-  function Controller(builder, notifier, $location, $interval) {
+  function FormController(builder, notifier, $location, $interval) {
     this.construct(builder.build($location), notifier, $location, $interval);
   }
 
-  var fn = Controller.prototype,
+  var fn = FormController.prototype,
       chfn = Cyberhawk.Controller.prototype,
-      app = angular.module('measurement/controller', [
+      app = angular.module('measurement/form_controller', [
         'cyberhawk/notifier', 'cyberhawk/requester'
       ]);
 
@@ -57,12 +57,12 @@
     ].join(":").replace(/\b(\d)\b/g, "0$1");
   };
 
-  app.controller('Measurement.Controller', [
+  app.controller('Measurement.FormController', [
     'cyberhawk_requester', 'cyberhawk_notifier',
     '$location', '$interval',
-    Controller
+    FormController
   ]);
 
-  Measurement.Controller = Controller;
+  Measurement.FormController = FormController;
 
 })(window._, window.angular, window.Cyberhawk, window.Measurement);

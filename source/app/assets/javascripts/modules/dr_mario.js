@@ -33,7 +33,7 @@
         '/users/:user_id/measurements/new'
       ],
       config: {
-        controller: 'Measurement.Controller',
+        controller: 'Measurement.FormController',
         controllerAs: 'mc'
       }
     },{
