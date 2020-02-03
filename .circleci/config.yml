@@ -9,6 +9,7 @@ jobs:
           DR_MARIO_POSTGRES_USER: dr_mario
           DR_MARIO_POSTGRES_NAME: dr_mario
           DR_MARIO_POSTGRES_PASSWORD: dr_mario
+          DR_MARIO_PASSWORD_SALT: abcd
       - image: circleci/postgres
         name: postgres
         environment:
