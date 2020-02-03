@@ -7,7 +7,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="measurement in mc.data">
+    <tr ng-repeat="measurement in mc.data"
+        ng-class="measurement.odd ? 'info' : ''">
       <td>{{measurement.glicemy}}</td>
       <td>{{measurement.date}}</td>
       <td>{{measurement.time}}</td>

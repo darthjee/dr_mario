@@ -11,8 +11,21 @@
 
   _.extend(fn, Cyberhawk.Controller.prototype);
 
-  fn.construct = function(requester, notifier, $location) {
-    chfn.construct.apply(this, arguments);
+  fn._setData = function() {
+    chfn._setData.apply(this, arguments);
+    this._decorateData();
+  };
+
+  fn._decorateData = function() {
+    var group = _.groupBy(this.data, 'date');
+
+    var odd = false;
+    _.each(group, function(entries) {
+      _.each(entries, function(entry) {
+        entry.odd = odd;
+      });
+      odd = !odd;
+    });
   };
 
   app.controller('Measurement.IndexController', [
