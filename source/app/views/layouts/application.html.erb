@@ -13,10 +13,11 @@
   </head>
   <body ng-app="dr_mario">
 
-    <div ng-view>
+    <%= render 'layouts/header' %>
+
+    <div class="container-fluid" ng-view>
       <%= yield %>
     </div>
 
   </body>
 </html>
-

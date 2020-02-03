@@ -1,15 +1,49 @@
-<form>
-  <dt><label for="glicemy">Glicemia</dt>
-  <dd><input name="glicemy" id="glicemy" ng-model="mc.data.glicemy" type="number"></dd>
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="glicemy" class="col-sm-1 control-label">Glicemia</label>
+    <input name="glicemy"
+           id="glicemy"
+           class="col-sm-1"
+           ng-model="mc.data.glicemy"
+           type="number">
+  </div>
 
-  <dt><label for="date">Dia</dt>
-  <dd><input name="date" id="date" ng-model="mc.data.date"></dd>
+  <div class="form-group">
+    <label for="date" class="col-sm-1 control-label">Dia</label>
+    <input name="date"
+           id="date"
+           class="col-sm-1"
+           ng-model="mc.data.date">
+  </div>
 
-  <dt><label for="time">Hora</dt>
-  <dd><input name="time" id="time" ng-model="mc.data.time"></dd>
-  <input type="checkbox" name="current_time" id="current_time"
-         ng-model="mc.autoUpdate"
-         ng-change="mc.toggleClock()">
-  <label for="current_time">Horario atual</label>
-  <button ng-click="mc.save()">Salvar</button>
+  <div class="form-group">
+    <label for="time" class="col-sm-1 control-label">Hora</label>
+    <input name="time" id="time" class="col-sm-1" ng-model="mc.data.time">
+  </div>
+
+  <div class="form-group">
+    <div class="checkbox">
+      <div class="col-sm-offset-1 col-sm-1">
+        <label for="current_time" class="col-sm-1 control-label">
+          <input type="checkbox"
+                 name="current_time"
+                 id="current_time"
+                 class="col-sm-1"
+                 ng-model="mc.autoUpdate"
+                 ng-change="mc.toggleClock()">
+          Horario atual
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-1">
+      <button ng-click="mc.save()"
+              type"submit"
+              class="btn btn-default">
+        Salvar
+      </button>
+    </div>
+  </div>
 </form>
