@@ -8,7 +8,7 @@ describe User do
 
     let(:login_hash) do
       {
-        login:    login,
+        login: login,
         password: password
       }
     end
