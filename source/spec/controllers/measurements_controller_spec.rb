@@ -3,7 +3,8 @@
 require 'spec_helper'
 
 describe MeasurementsController do
-  let(:user_id) { 10 }
+  let(:user)    { create(:user) }
+  let(:user_id) { user.id }
   let(:expected_json) do
     Measurement::Decorator.new(expected_object).to_json
   end
@@ -35,7 +36,7 @@ describe MeasurementsController do
   describe 'GET index' do
     render_views
 
-    before { create_list(:measurement, 1) }
+    before { create_list(:measurement, 1, user: user) }
 
     context 'when requesting json' do
       let(:expected_object) { Measurement.all }
@@ -73,7 +74,7 @@ describe MeasurementsController do
   describe 'GET show' do
     render_views
 
-    let(:measurement)    { create(:measurement) }
+    let(:measurement)    { create(:measurement, user: user) }
     let(:measurement_id) { measurement.id }
 
     context 'when requesting json' do
@@ -152,7 +153,9 @@ describe MeasurementsController do
       end
 
       context 'when glicemy is nil' do
-        let(:measurement) { Measurement.new(payload) }
+        let(:measurement) do
+          Measurement.new(payload.merge(user_id: user_id))
+        end
         let(:payload) do
           {
             glicemy: nil,
@@ -180,7 +183,9 @@ describe MeasurementsController do
       end
 
       context 'when date and time are nil' do
-        let(:measurement) { Measurement.new(payload) }
+        let(:measurement) do
+          Measurement.new(payload.merge(user_id: user_id))
+        end
         let(:payload) do
           {
             glicemy: 120,
