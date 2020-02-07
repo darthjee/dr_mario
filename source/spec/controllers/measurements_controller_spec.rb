@@ -31,6 +31,20 @@ describe MeasurementsController do
         expect(response).to redirect_to("#/users/#{user_id}/measurements/new")
       end
     end
+
+    context 'when requesting json' do
+      let(:expected_object) { user.measurements.new }
+
+      before do
+        get :new, params: { user_id: user_id, format: :json }
+      end
+
+      it { expect(response).to be_successful }
+
+      it 'returns measurements serialized' do
+        expect(response.body).to eq(expected_json)
+      end
+    end
   end
 
   describe 'GET index' do
