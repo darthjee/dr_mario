@@ -14,6 +14,6 @@ class MeasurementsController < ApplicationController
   end
 
   def user
-    User.last
+    User.find(params.require(:user_id))
   end
 end
