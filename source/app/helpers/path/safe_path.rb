@@ -25,8 +25,8 @@ module Path
       @path_method ||= MATCHER.match(method)[1] + '_path'
     end
 
-    def safe_path(args)
-      PathCaller.new(controller, path_method, args).path
+    def safe_path(*args)
+      PathCaller.new(controller, path_method, *args).path
     end
   end
 end

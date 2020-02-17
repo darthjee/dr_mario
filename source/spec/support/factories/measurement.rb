@@ -5,5 +5,6 @@ FactoryBot.define do
     glicemy { 100 }
     date    { Date.today }
     time    { Time.now }
+    user
   end
 end
