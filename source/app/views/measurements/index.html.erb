@@ -15,6 +15,6 @@
     </tr>
     </body>
 </table>
-<%= angular_safe_link_to(:new_user_measurement) do %>
+<%= angular_safe_link_to(:new_user_measurement, user_id: "{{mc.user_id}}") do %>
   Nova Medida
 <% end %>
