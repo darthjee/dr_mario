@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class LoginController < ApplicationController
+  rescue_from DrMario::Exception::LoginFailed, with: :not_found
+
   protect_from_forgery except: [:create]
 
   def create

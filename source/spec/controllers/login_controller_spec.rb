@@ -8,11 +8,13 @@ describe LoginController do
   let(:password) { 'password' }
   let(:cookies)  { controller.send(:cookies) }
 
+  let(:request_password) { password }
+
   let(:parameters) do
     {
       login: {
         login: login,
-        password: password
+        password: request_password
       }
     }
   end
@@ -31,7 +33,7 @@ describe LoginController do
         end.to change { cookies[:session] }
       end
 
-      context 'when request is a success' do
+      context 'when request is done' do
         let(:created_session) { Session.last }
 
         let(:expected_json) do
@@ -62,6 +64,48 @@ describe LoginController do
         it 'stores session in cookies' do
           expect(cookies.signed[:session]).to eq(created_session.id)
         end
+      end
+    end
+
+    context 'when request is a failure due to bad password' do
+      let(:request_password) { 'wrong_pass' }
+
+      it 'does not create a session' do
+        expect do
+          post :create, params: parameters
+        end.not_to change(Session, :count)
+      end
+
+      it 'does not add session to cookie' do
+        expect do
+          post :create, params: parameters
+        end.not_to change { cookies[:session] }
+      end
+
+      it do
+        post :create, params: parameters
+        expect(response).not_to be_successful
+      end
+    end
+
+    context 'when request is a failure due to bad login' do
+      let(:login) { 'wrong_login' }
+
+      it 'does not create a session' do
+        expect do
+          post :create, params: parameters
+        end.not_to change(Session, :count)
+      end
+
+      it 'does not add session to cookie' do
+        expect do
+          post :create, params: parameters
+        end.not_to change { cookies[:session] }
+      end
+
+      it do
+        post :create, params: parameters
+        expect(response).not_to be_successful
       end
     end
   end
