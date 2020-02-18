@@ -48,7 +48,8 @@ fdescribe LoginController do
         end
 
         it 'creates a session that will expire' do
-          expect(created_session.expiration).to be_in((Time.now..2.days.from_now))
+          expect(created_session.expiration)
+            .to be_in((Time.now..Settings.session_period.from_now))
         end
       end
     end

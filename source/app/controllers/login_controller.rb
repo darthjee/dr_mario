@@ -4,7 +4,7 @@ class LoginController < ApplicationController
   protect_from_forgery except: [:create]
 
   def create
-    user.sessions.create(expiration: 2.days.from_now)
+    user.sessions.create(expiration: Settings.session_period.from_now)
     render json: User::Decorator.new(user)
   end
 

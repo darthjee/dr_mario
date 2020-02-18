@@ -7,6 +7,7 @@ class Settings
 
   with_settings(
     :password_salt,
-    hex_code_size: 4
+    hex_code_size: 4,
+    session_period: 2.days
   )
 end
