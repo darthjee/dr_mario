@@ -30,7 +30,7 @@ describe LoginController do
       it 'adds session to cookie' do
         expect do
           post :create, params: parameters
-        end.to change { cookies[:session] }
+        end.to(change { cookies[:session] })
       end
 
       context 'when request is done' do
@@ -79,7 +79,7 @@ describe LoginController do
       it 'does not add session to cookie' do
         expect do
           post :create, params: parameters
-        end.not_to change { cookies[:session] }
+        end.not_to(change { cookies[:session] })
       end
 
       it do
@@ -100,7 +100,7 @@ describe LoginController do
       it 'does not add session to cookie' do
         expect do
           post :create, params: parameters
-        end.not_to change { cookies[:session] }
+        end.not_to(change { cookies[:session] })
       end
 
       it do
