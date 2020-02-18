@@ -2,10 +2,11 @@
 
 require 'spec_helper'
 
-fdescribe LoginController do
+describe LoginController do
   let(:user)     { create(:user, password: password) }
   let(:login)    { user.login }
   let(:password) { 'password' }
+  let(:cookies)  { controller.send(:cookies) }
 
   let(:parameters) do
     {
@@ -22,6 +23,12 @@ fdescribe LoginController do
         expect do
           post :create, params: parameters
         end.to change(Session, :count).by(1)
+      end
+
+      it 'adds session to cookie' do
+        expect do
+          post :create, params: parameters
+        end.to change { cookies[:session] }
       end
 
       context 'when request is a success' do
@@ -50,6 +57,10 @@ fdescribe LoginController do
         it 'creates a session that will expire' do
           expect(created_session.expiration)
             .to be_in((Time.now..Settings.session_period.from_now))
+        end
+
+        it 'stores session in cookies' do
+          expect(cookies.signed[:session]).to eq(created_session.id)
         end
       end
     end
