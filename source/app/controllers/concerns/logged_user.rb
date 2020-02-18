@@ -9,7 +9,7 @@ module LoggedUser
 
   private
 
-  def logged_user
-    @logged_user ||= Processor.new(self).user
+  def save_session
+    Processor.new(self).login(user)
   end
 end
