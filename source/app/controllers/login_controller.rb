@@ -6,15 +6,20 @@ class LoginController < ApplicationController
   protect_from_forgery except: [:create]
 
   def create
-    session = user.sessions.create(expiration: Settings.session_period.from_now)
     cookies.signed[:session] = session.id
-    render json: User::Decorator.new(user)
+    render json: User::Decorator.new(logged_user)
   end
 
   private
 
-  def user
-    @user ||= User.login(login_params)
+  def logged_user
+    @logged_user ||= User.login(login_params)
+  end
+
+  def session
+    @session ||= logged_user.sessions.create(
+      expiration: Settings.session_period.from_now
+    )
   end
 
   def login_params
