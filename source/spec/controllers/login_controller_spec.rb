@@ -110,4 +110,3 @@ describe LoginController do
     end
   end
 end
-

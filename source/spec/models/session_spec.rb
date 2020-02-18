@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Session do
   describe 'scopes' do
     describe '.valid' do
