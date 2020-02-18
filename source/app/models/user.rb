@@ -3,6 +3,7 @@
 class User < ApplicationRecord
   validates_presence_of :login, :email, :encrypted_password
   has_many :measurements
+  has_many :sessions
 
   def self.login(login:, password:)
     User.find_by!(login: login).verify_password!(password)

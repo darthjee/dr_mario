@@ -18,13 +18,15 @@ fdescribe LoginController do
 
   describe 'POST create' do
     context 'when login is correct' do
-      xit 'creates a session' do
+      it 'creates a session' do
         expect do
           post :create, params: parameters
-        end
+        end.to change(Session, :count).by(1)
       end
 
-      context 'after request' do
+      context 'when request is a success' do
+        let(:created_session) { Session.last }
+
         let(:expected_json) do
           User::Decorator.new(user).to_json
         end
@@ -39,6 +41,14 @@ fdescribe LoginController do
 
         it 'returns user serialized' do
           expect(response.body).to eq(expected_json)
+        end
+
+        it 'creates a session for the user' do
+          expect(created_session.user).to eq(user)
+        end
+
+        it 'creates a session that will expire' do
+          expect(created_session.expiration).to be_in((Time.now..2.days.from_now))
         end
       end
     end
