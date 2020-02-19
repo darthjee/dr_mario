@@ -5,5 +5,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     resources :measurements, only: %i[index show create new]
+
+    collection do
+      resources :login, only: [:create]
+    end
   end
 end

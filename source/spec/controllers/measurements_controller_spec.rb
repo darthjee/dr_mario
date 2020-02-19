@@ -133,6 +133,46 @@ describe MeasurementsController do
   end
 
   describe 'POST create' do
+    let(:session) { create(:session, user: user) }
+
+    before do
+      cookies.signed[:session] = session.id
+    end
+
+    context 'when requesting json format and user is not logged' do
+      let(:parameters) do
+        { user_id: user_id, format: :json, measurement: payload }
+      end
+      let(:payload) do
+        {
+          glicemy: 100,
+          date: '2020-01-15',
+          time: '10:44:55'
+        }
+      end
+
+      before do
+        cookies.delete(:session)
+      end
+
+      it do
+        expect { post :create, params: parameters }
+          .not_to change(Measurement, :count)
+      end
+
+      it do
+        post :create, params: parameters
+
+        expect(response).not_to be_successful
+      end
+
+      it do
+        post :create, params: parameters
+
+        expect(response.status).to eq(403)
+      end
+    end
+
     context 'when requesting json format' do
       let(:measurement) { Measurement.last }
       let(:parameters) do
@@ -170,6 +210,7 @@ describe MeasurementsController do
         let(:measurement) do
           Measurement.new(payload.merge(user_id: user_id))
         end
+
         let(:payload) do
           {
             glicemy: nil,
