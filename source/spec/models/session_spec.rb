@@ -2,7 +2,7 @@
 
 describe Session do
   describe 'scopes' do
-    describe '.valid' do
+    describe '.active' do
       let!(:session) do
         create(:session, expiration: expiration)
       end
@@ -11,7 +11,7 @@ describe Session do
         let(:expiration) { 2.days.from_now }
 
         it do
-          expect(described_class.valid).to include(session)
+          expect(described_class.active).to include(session)
         end
       end
 
@@ -19,7 +19,7 @@ describe Session do
         let(:expiration) { 2.days.ago }
 
         it do
-          expect(described_class.valid).not_to include(session)
+          expect(described_class.active).not_to include(session)
         end
       end
 
@@ -27,7 +27,7 @@ describe Session do
         let(:expiration) { nil }
 
         it do
-          expect(described_class.valid).to include(session)
+          expect(described_class.active).to include(session)
         end
       end
     end

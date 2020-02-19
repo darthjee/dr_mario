@@ -29,7 +29,11 @@ module LoggedUser
     end
 
     def session
-      @session ||= Session.valid.find_by(id: cookies[SESSION_KEY])
+      @session ||= Session.active.find_by(id: session_id)
+    end
+
+    def session_id
+      cookies[SESSION_KEY]
     end
 
     def cookies
