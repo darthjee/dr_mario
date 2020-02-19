@@ -34,6 +34,8 @@ module LoggedUser
 
     def session_id
       cookies[SESSION_KEY]
+    rescue NoMethodError
+      nil
     end
 
     def cookies

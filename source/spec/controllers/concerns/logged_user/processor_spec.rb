@@ -91,10 +91,22 @@ describe LoggedUser::Processor do
       context 'with expiration in the past' do
         let(:expiration) { 2.days.ago }
 
-        it 'returns the user' do
-          expect(processor.logged_user).to be_nil
-        end
+        it { expect(processor.logged_user).to be_nil }
       end
+    end
+
+    context "when user is logged with an invalid cookie" do
+      let(:signed_cookies) { instance_double(ActionDispatch::Cookies::SignedKeyRotatingCookieJar) }
+
+      before do
+        allow(signed_cookies).to receive(:[]).and_raise(NoMethodError)
+      end
+
+      it do
+        expect { processor.logged_user }.not_to raise_error
+      end
+
+      it { expect(processor.logged_user).to be_nil }
     end
   end
 end
