@@ -4,6 +4,8 @@ class MeasurementsController < ApplicationController
   include OnePageApplication
   include LoggedUser
 
+  rescue_from DrMario::Exception::Unauthorized, with: :forbidden
+
   protect_from_forgery except: [:create]
 
   resource_for :measurement
@@ -21,6 +23,7 @@ class MeasurementsController < ApplicationController
   end
 
   def check_user
-    raise "bla" unless user == logged_user
+    return if user == logged_user
+    raise DrMario::Exception::Unauthorized
   end
 end

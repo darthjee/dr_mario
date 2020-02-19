@@ -163,7 +163,13 @@ describe MeasurementsController do
       it do
         post :create, params: parameters
 
-        expect(response).to be_successful
+        expect(response).not_to be_successful
+      end
+
+      it do
+        post :create, params: parameters
+
+        expect(response.status).to eq(403)
       end
     end
 
