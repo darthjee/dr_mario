@@ -24,6 +24,7 @@ class MeasurementsController < ApplicationController
 
   def check_user
     return if user == logged_user
+
     raise DrMario::Exception::Unauthorized
   end
 end

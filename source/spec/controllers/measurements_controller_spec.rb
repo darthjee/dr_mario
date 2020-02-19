@@ -173,7 +173,6 @@ describe MeasurementsController do
       end
     end
 
-
     context 'when requesting json format' do
       let(:measurement) { Measurement.last }
       let(:parameters) do
