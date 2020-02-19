@@ -55,4 +55,44 @@ describe LoggedUser::Processor do
       end
     end
   end
+
+  describe '#logged_user' do
+    context 'when user is not logged' do
+      it { expect(processor.logged_user).to be_nil }
+    end
+
+    context 'when user is logged' do
+      let(:session) do
+        create(:session, expiration: expiration, user: user)
+      end
+      
+      before do
+        signed_cookies[:session] = session.id
+      end
+
+      context 'without expiration' do
+        let(:expiration) { nil }
+
+        it 'returns the user' do
+          expect(processor.logged_user).to eq(user)
+        end
+      end
+
+      context 'with expiration in the future' do
+        let(:expiration) { 2.days.from_now }
+
+        it 'returns the user' do
+          expect(processor.logged_user).to eq(user)
+        end
+      end
+
+      context 'with expiration in the past' do
+        let(:expiration) { 2.days.ago }
+
+        it 'returns the user' do
+          expect(processor.logged_user).to be_nil
+        end
+      end
+    end
+  end
 end
