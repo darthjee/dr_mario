@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe LoggedUser::Processor do
@@ -17,7 +19,7 @@ describe LoggedUser::Processor do
     allow(cookies).to receive(:signed).and_return(signed_cookies)
   end
 
-  describe "#login" do
+  describe '#login' do
     let(:session) { Session.last }
 
     it 'creates a session' do
@@ -33,7 +35,7 @@ describe LoggedUser::Processor do
 
     context 'when login has been called' do
       let(:expected_expiration_range) do
-        (Settings.session_period.from_now-1.second)..
+        (Settings.session_period.from_now - 1.second)..
         Settings.session_period.from_now
       end
 
@@ -65,7 +67,7 @@ describe LoggedUser::Processor do
       let(:session) do
         create(:session, expiration: expiration, user: user)
       end
-      
+
       before do
         signed_cookies[:session] = session.id
       end
