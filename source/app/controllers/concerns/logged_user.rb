@@ -12,4 +12,8 @@ module LoggedUser
   def save_session
     Processor.new(self).login(user)
   end
+
+  def logged_user
+    @logged_user ||= Processor.new(self).logged_user
+  end
 end
