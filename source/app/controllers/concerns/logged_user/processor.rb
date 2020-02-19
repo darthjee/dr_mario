@@ -9,21 +9,21 @@ module LoggedUser
     end
 
     def login(user)
-      @user = user
+      @logged_user = user
 
       cookies[SESSION_KEY] = new_session.id
     end
 
     def logged_user
-      @user ||= session&.user
+      @logged_user ||= session&.user
     end
 
     private
 
-    attr_reader :controller, :user
+    attr_reader :controller
 
     def new_session
-      @session = user.sessions.create(
+      @session = logged_user.sessions.create(
         expiration: Settings.session_period.from_now
       )
     end

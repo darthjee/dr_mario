@@ -96,7 +96,9 @@ describe LoggedUser::Processor do
     end
 
     context 'when user is logged with an invalid cookie' do
-      let(:signed_cookies) { instance_double(ActionDispatch::Cookies::SignedKeyRotatingCookieJar) }
+      let(:signed_cookies) do
+        instance_double(ActionDispatch::Cookies::SignedKeyRotatingCookieJar)
+      end
 
       before do
         allow(signed_cookies).to receive(:[]).and_raise(NoMethodError)
