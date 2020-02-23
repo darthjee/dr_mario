@@ -8,9 +8,6 @@ class LoginController < ApplicationController
 
   before_action :save_session, only: :create
 
-  def new
-  end
-
   def create
     render json: User::Decorator.new(user)
   end
