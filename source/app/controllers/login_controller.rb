@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class LoginController < ApplicationController
+  include OnePageApplication
   include LoggedUser
 
   protect_from_forgery except: [:create]
 
-  before_action :save_session
+  before_action :save_session, only: :create
+
+  def new
+  end
 
   def create
     render json: User::Decorator.new(user)
