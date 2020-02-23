@@ -8,16 +8,35 @@
   function Controller(http, notifier) {
     this.http     = http;
     this.notifier = notifier;
-    console.info(this);
-    window.d = this;
+
+    _.bindAll(this, '_success', '_error');
   }
 
   var fn = Controller.prototype;
 
   fn.submit = function() {
-    console.info('click');
-    console.info(this.login);
-    console.info(this.password);
+    this._request()
+      .success(this._success)
+      .error(this._error);
+  };
+
+  fn._request = function() {
+    return this.http.post('/users/login', {
+      login: {
+        login: this.login,
+        password: this.password
+      }
+    });
+  }
+
+  fn._success = function(user) {
+    this.notifier.notify('login-success', user);
+  };
+
+  fn._error = function(_body, status) {
+    this.notifier.notify('login-errror', {
+      status: status
+    });
   };
 
   app.controller('Login.Controller', [
