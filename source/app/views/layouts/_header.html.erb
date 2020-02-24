@@ -15,12 +15,20 @@
 
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li>
+        <li ng-hide="globalController.logged">
           <a
             data-toggle="modal"
             href="#"
             data-target="#login-modal">
             Login
+          </a>
+        </li>
+        <li ng-show="globalController.logged">
+          <a
+            data-toggle="modal"
+            href="#"
+            onclick="return false;">
+            Logoff
           </a>
         </li>
       </ul>
