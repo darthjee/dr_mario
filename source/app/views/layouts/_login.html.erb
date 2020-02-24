@@ -6,6 +6,12 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Fazer login</h4>
         </div>
+        <div class="alert alert-danger" ng-show="loginController.incorrect">
+          Usu&aacute;rio e senha incorretos.
+        </div>
+        <div class="alert alert-danger" ng-show="loginController.error">
+          Ocorreu um erro inesperado, tente novamente mais tarde.
+        </div>
         <div class="modal-body">
           <div class="form-group">
             <label for="login">Nome de usu&aacute;rio</label>

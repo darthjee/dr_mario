@@ -31,6 +31,7 @@
 
   fn._success = function(user) {
     this.notifier.notify('login-success', user);
+    this.incorrect = false
     $('#login-modal').modal('hide');
   };
 
@@ -38,6 +39,11 @@
     this.notifier.notify('login-errror', {
       status: status
     });
+    if (status / 100 == 4) {
+      this.incorrect = true
+    } else {
+      this.error = true
+    }
   };
 
   app.controller('Login.Controller', [
