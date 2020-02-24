@@ -1,4 +1,4 @@
-(function(_, angular) {
+(function(_, angular, $) {
   var app = angular.module('login/controller', [
     'cyberhawk/controller',
     'cyberhawk/notifier',
@@ -31,6 +31,7 @@
 
   fn._success = function(user) {
     this.notifier.notify('login-success', user);
+    $('#login-modal').modal('hide');
   };
 
   fn._error = function(_body, status) {
@@ -43,5 +44,5 @@
     '$http', 'cyberhawk_notifier',
     Controller
   ]);
-}(window._, window.angular));
+}(window._, window.angular, window.$));
 
