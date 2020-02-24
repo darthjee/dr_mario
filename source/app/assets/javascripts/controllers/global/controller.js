@@ -8,7 +8,8 @@
   }
 
   app.controller('Global.Controller', [
-    'cyberhawk_notifier', Controller
+    'cyberhawk_notifier',
+    Controller
   ]);
 
   Global.Controller = Controller;
