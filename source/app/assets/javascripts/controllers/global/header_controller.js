@@ -3,9 +3,9 @@
     'cyberhawk/notifier',
   ]);
 
-  function Controller(notifier, interval) {
+  function Controller(notifier, timeout) {
     this.notifier = notifier;
-    this.interval = interval;
+    this.timeout = timeout;
 
     _.bindAll(this, '_login');
     this._listen();
@@ -20,14 +20,15 @@
   fn._login = function(user) {
     var that = this;
 
-    this.interval(function() {
+    this.timeout(function() {
       that.user = user;
       that.logged = true;
+      console.info('logged');
     }, 1);
   };
 
   app.controller('Global.HeaderController', [
-    'cyberhawk_notifier', '$interval',
+    'cyberhawk_notifier', '$timeout',
     Controller
   ]);
 
