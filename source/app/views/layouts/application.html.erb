@@ -16,10 +16,8 @@
     <%= render 'layouts/header' %>
     <%= render 'layouts/login' %>
 
-    <div ng-controller="Global.Controller as globalController">
-      <div class="container-fluid" ng-view>
-        <%= yield %>
-      </div>
+    <div class="container-fluid" ng-view>
+      <%= yield %>
     </div>
 
   </body>
