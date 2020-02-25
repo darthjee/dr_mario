@@ -8,19 +8,29 @@
     this.notifier = notifier;
     this.timeout = timeout;
 
-    _.bindAll(this, '_login');
+    _.bindAll(this, '_login', '_completeLogoff');
     this._listen();
-    this.checkLogin();
+    this._checkLogin();
   }
 
   var fn = Controller.prototype;
+
+  fn.logoff = function() {
+    console.info('logoff');
+    this.http.delete('/users/logoff').success(this._completeLogoff);
+  };
 
   fn._listen = function() {
     this.notifier.register('login-success', this._login);
   };
 
-  fn.checkLogin = function() {
+  fn._checkLogin = function() {
     this.http.get('/users/login.json').success(this._login);
+  };
+
+  fn._completeLogoff = function() {
+    this.user = null;
+    this.logged = false;
   };
 
   fn._login = function(user) {
@@ -29,7 +39,6 @@
     this.timeout(function() {
       that.user = user;
       that.logged = true;
-      console.info('logged');
     }, 1);
   };
 
