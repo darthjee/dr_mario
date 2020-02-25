@@ -1,0 +1,52 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="login-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form ng-controller="Login.Controller as loginController">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Fazer login</h4>
+        </div>
+        <div class="alert alert-danger" ng-show="loginController.incorrect">
+          Usu&aacute;rio e senha incorretos.
+        </div>
+        <div class="alert alert-danger" ng-show="loginController.error">
+          Ocorreu um erro inesperado, tente novamente mais tarde.
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="login">Nome de usu&aacute;rio</label>
+            <input
+                   type="text"
+                   class="form-control"
+                   id="login"
+                   placeholder="Usu&aacute;rio"
+                   ng-model="loginController.login">
+          </div>
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input
+                   type="password"
+                   class="form-control"
+                   id="password"
+                   placeholder="Senha"
+                   ng-model="loginController.password">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+             type="button"
+             class="btn btn-default"
+             data-dismiss="modal">
+            Cancelar
+          </button>
+          <button
+             type="submit"
+             class="btn btn-primary"
+             ng-click="loginController.submit()">
+            Fazer Login
+          </button>
+        </div>
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

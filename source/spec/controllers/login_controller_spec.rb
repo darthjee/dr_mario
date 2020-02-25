@@ -10,6 +10,10 @@ describe LoginController do
 
   let(:request_password) { password }
 
+  let(:expected_json) do
+    User::Decorator.new(user).to_json
+  end
+
   let(:parameters) do
     {
       login: {
@@ -35,10 +39,6 @@ describe LoginController do
 
       context 'when request is done' do
         let(:created_session) { Session.last }
-
-        let(:expected_json) do
-          User::Decorator.new(user).to_json
-        end
 
         before do
           post :create, params: parameters
@@ -82,9 +82,18 @@ describe LoginController do
         end.not_to(change { cookies[:session] })
       end
 
-      it do
-        post :create, params: parameters
-        expect(response).not_to be_successful
+      context 'when the request is completed' do
+        before do
+          post :create, params: parameters
+        end
+
+        it do
+          expect(response).not_to be_successful
+        end
+
+        it do
+          expect(response.status).to eq(404)
+        end
       end
     end
 
@@ -103,9 +112,52 @@ describe LoginController do
         end.not_to(change { cookies[:session] })
       end
 
-      it do
-        post :create, params: parameters
-        expect(response).not_to be_successful
+      context 'when the request is completed' do
+        before do
+          post :create, params: parameters
+        end
+
+        it do
+          expect(response).not_to be_successful
+        end
+
+        it do
+          expect(response.status).to eq(404)
+        end
+      end
+    end
+
+    describe '#check' do
+      before do
+        cookies.signed[:session] = session.id if session
+
+        get :check, format: :json
+      end
+
+      context 'when user is not logged' do
+        let(:session) {}
+
+        it { expect(response).not_to be_successful }
+
+        it { expect(response.status).to eq(404) }
+      end
+
+      context 'when user is logged' do
+        let(:session) { create(:session, user: user) }
+
+        it { expect(response).to be_successful }
+
+        it 'returns user serialized' do
+          expect(response.body).to eq(expected_json)
+        end
+      end
+
+      context 'when user is logged with expired session' do
+        let(:session) { create(:session, :expired, user: user) }
+
+        it { expect(response).not_to be_successful }
+
+        it { expect(response.status).to eq(404) }
       end
     end
   end

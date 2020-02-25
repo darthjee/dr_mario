@@ -2,7 +2,8 @@
 
 module DrMario
   class Exception < StandardError
-    class LoginFailed < DrMario::Exception; end
+    class LoginFailed  < DrMario::Exception; end
     class Unauthorized < DrMario::Exception; end
+    class NotLogged    < DrMario::Exception; end
   end
 end

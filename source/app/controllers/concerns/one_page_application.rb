@@ -7,7 +7,7 @@ module OnePageApplication
   included do
     layout :layout_for_page
     redirection_rule :render_root, :perform_angular_redirect?
-    skip_redirection_rule :render_root, :ajax?, :home?
+    skip_redirection_rule :render_root, :ajax?, :home?, :post?
   end
 
   private
@@ -30,6 +30,10 @@ module OnePageApplication
 
   def html?
     request.format.html?
+  end
+
+  def post?
+    request.post?
   end
 
   def layout_for_page

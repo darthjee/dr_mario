@@ -5,6 +5,7 @@ module LoggedUser
 
   included do
     rescue_from DrMario::Exception::LoginFailed, with: :not_found
+    rescue_from DrMario::Exception::NotLogged,   with: :not_found
   end
 
   private
@@ -19,5 +20,9 @@ module LoggedUser
 
   def logged_user_processor
     @logged_user_processor ||= Processor.new(self)
+  end
+
+  def check_logged!
+    raise DrMario::Exception::NotLogged unless logged_user
   end
 end
