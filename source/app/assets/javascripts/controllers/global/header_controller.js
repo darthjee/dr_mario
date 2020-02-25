@@ -3,18 +3,24 @@
     'cyberhawk/notifier',
   ]);
 
-  function Controller(notifier, timeout) {
+  function Controller(http, notifier, timeout) {
+    this.http = http;
     this.notifier = notifier;
     this.timeout = timeout;
 
     _.bindAll(this, '_login');
     this._listen();
+    this.checkLogin();
   }
 
   var fn = Controller.prototype;
 
   fn._listen = function() {
-    this.notifier.register('login-success', this._login)
+    this.notifier.register('login-success', this._login);
+  };
+
+  fn.checkLogin = function() {
+    this.http.get('/users/login.json').success(this._login);
   };
 
   fn._login = function(user) {
@@ -28,7 +34,7 @@
   };
 
   app.controller('Global.HeaderController', [
-    'cyberhawk_notifier', '$timeout',
+    '$http', 'cyberhawk_notifier', '$timeout',
     Controller
   ]);
 

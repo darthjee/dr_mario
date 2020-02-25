@@ -10,6 +10,10 @@ describe LoginController do
 
   let(:request_password) { password }
 
+  let(:expected_json) do
+    User::Decorator.new(user).to_json
+  end
+
   let(:parameters) do
     {
       login: {
@@ -35,10 +39,6 @@ describe LoginController do
 
       context 'when request is done' do
         let(:created_session) { Session.last }
-
-        let(:expected_json) do
-          User::Decorator.new(user).to_json
-        end
 
         before do
           post :create, params: parameters
@@ -146,6 +146,10 @@ describe LoginController do
         let(:session) { create(:session, user: user) }
 
         it { expect(response).to be_successful }
+
+        it 'returns user serialized' do
+          expect(response.body).to eq(expected_json)
+        end
       end
 
       context 'when user is logged with expired session' do
