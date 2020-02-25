@@ -17,6 +17,10 @@ class LoginController < ApplicationController
     render json: User::Decorator.new(logged_user)
   end
 
+  def logoff
+    destroy_session
+  end
+
   private
 
   def user

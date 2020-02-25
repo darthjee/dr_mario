@@ -14,6 +14,10 @@ module LoggedUser
       cookies[SESSION_KEY] = new_session.id
     end
 
+    def logoff
+      controller.send(:cookies).delete(SESSION_KEY)
+    end
+
     def logged_user
       @logged_user ||= session&.user
     end

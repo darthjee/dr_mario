@@ -6,7 +6,6 @@ describe LoginController do
   let(:user)     { create(:user, password: password) }
   let(:login)    { user.login }
   let(:password) { 'password' }
-  let(:cookies)  { controller.send(:cookies) }
 
   let(:request_password) { password }
 
@@ -32,9 +31,9 @@ describe LoginController do
       end
 
       it 'adds session to cookie' do
-        expect do
-          post :create, params: parameters
-        end.to(change { cookies[:session] })
+        expect { post :create, params: parameters }
+          .to change { cookies[:session] }
+          .from(nil)
       end
 
       context 'when request is done' do
@@ -159,6 +158,20 @@ describe LoginController do
 
         it { expect(response.status).to eq(404) }
       end
+    end
+  end
+
+  describe 'DELETE logoff' do
+    let(:session) { create(:session, user: user) }
+
+    before do
+      controller.send(:cookies).signed[:session] = session.id
+    end
+
+    it do
+      expect { delete :logoff }
+        .to change { controller.send(:cookies)[:session] }
+        .to(nil)
     end
   end
 end

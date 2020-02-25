@@ -14,6 +14,10 @@ module LoggedUser
     logged_user_processor.login(user)
   end
 
+  def destroy_session
+    logged_user_processor.logoff
+  end
+
   def logged_user
     @logged_user ||= logged_user_processor.logged_user
   end
