@@ -11,11 +11,12 @@ module LoggedUser
     def login(user)
       @logged_user = user
 
-      cookies[SESSION_KEY] = new_session.id
+      signed_cookies[SESSION_KEY] = new_session.id
     end
 
     def logoff
-      controller.send(:cookies).delete(SESSION_KEY)
+      session&.update(expiration: 1.second.ago)
+      cookies.delete(SESSION_KEY)
     end
 
     def logged_user
@@ -37,13 +38,17 @@ module LoggedUser
     end
 
     def session_id
-      cookies[SESSION_KEY]
+      signed_cookies[SESSION_KEY]
     rescue NoMethodError
       nil
     end
 
+    def signed_cookies
+      @signed_cookies ||= cookies.signed
+    end
+
     def cookies
-      @cookies ||= controller.send(:cookies).signed
+      @cookies ||= controller.send(:cookies)
     end
 
     def params

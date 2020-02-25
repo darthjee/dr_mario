@@ -173,5 +173,22 @@ describe LoginController do
         .to change { controller.send(:cookies)[:session] }
         .to(nil)
     end
+
+    it 'expires session' do
+      expect { delete :logoff }
+        .to change { session.reload.expiration }
+        .from(nil)
+    end
+
+    context 'after request' do
+      before do
+        delete :logoff
+      end
+
+      it 'expires session' do
+        expect(session.reload.expiration)
+          .to be < (Time.now)
+      end
+    end
   end
 end
