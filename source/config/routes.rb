@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     resources :measurements, only: %i[index show create new]
 
     collection do
-      resources :login, only: [:create]
+      resources :login, only: [:create] do
+        get '/' => :check, on: :collection
+      end
     end
   end
 end

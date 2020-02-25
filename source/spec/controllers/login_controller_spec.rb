@@ -82,9 +82,18 @@ describe LoginController do
         end.not_to(change { cookies[:session] })
       end
 
-      it do
-        post :create, params: parameters
-        expect(response).not_to be_successful
+      context 'when the request is completed' do
+        before do
+          post :create, params: parameters
+        end
+
+        it do
+          expect(response).not_to be_successful
+        end
+
+        it do
+          expect(response.status).to eq(404)
+        end
       end
     end
 
@@ -103,9 +112,48 @@ describe LoginController do
         end.not_to(change { cookies[:session] })
       end
 
-      it do
-        post :create, params: parameters
-        expect(response).not_to be_successful
+      context 'when the request is completed' do
+        before do
+          post :create, params: parameters
+        end
+
+        it do
+          expect(response).not_to be_successful
+        end
+
+        it do
+          expect(response.status).to eq(404)
+        end
+      end
+    end
+
+    describe '#check' do
+      before do
+        cookies.signed[:session] = session.id if session
+
+        get :check, format: :json
+      end
+
+      context 'when user is not logged' do
+        let(:session) {}
+
+        it { expect(response).not_to be_successful }
+
+        it { expect(response.status).to eq(404) }
+      end
+
+      context 'when user is logged' do
+        let!(:session) { create(:session, user: user) }
+
+        it { expect(response).to be_successful }
+
+        context 'with expired session' do
+          let!(:session) { create(:session, :expired, user: user) }
+
+          it { expect(response).not_to be_successful }
+
+          it { expect(response.status).to eq(404) }
+        end
       end
     end
   end

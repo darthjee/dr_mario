@@ -7,9 +7,14 @@ class LoginController < ApplicationController
   protect_from_forgery except: [:create]
 
   before_action :save_session, only: :create
+  before_action :check_logged!, only: :check
 
   def create
     render json: User::Decorator.new(user)
+  end
+
+  def check
+    render json: User::Decorator.new(logged_user)
   end
 
   private
