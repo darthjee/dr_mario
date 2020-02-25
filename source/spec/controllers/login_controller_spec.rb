@@ -143,17 +143,17 @@ describe LoginController do
       end
 
       context 'when user is logged' do
-        let!(:session) { create(:session, user: user) }
+        let(:session) { create(:session, user: user) }
 
         it { expect(response).to be_successful }
+      end
 
-        context 'with expired session' do
-          let!(:session) { create(:session, :expired, user: user) }
+      context 'when user is logged with expired session' do
+        let(:session) { create(:session, :expired, user: user) }
 
-          it { expect(response).not_to be_successful }
+        it { expect(response).not_to be_successful }
 
-          it { expect(response.status).to eq(404) }
-        end
+        it { expect(response.status).to eq(404) }
       end
     end
   end
