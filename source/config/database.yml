@@ -1,12 +1,12 @@
 development: &development
-  adapter: postgresql
+  adapter: mysql2
   encoding: utf8
   database: dr_mario_development
   pool: 5
-  username: <%= ENV["DR_MARIO_POSTGRES_USER"] %>
-  password: <%= ENV["DR_MARIO_POSTGRES_PASSWORD"] %>
-  host: <%= ENV["DR_MARIO_POSTGRES_HOST"] %>
-  port: <%= ENV["DR_MARIO_POSTGRES_PORT"] %>
+  username: <%= ENV["DR_MARIO_MYSQL_USER"] %>
+  password: <%= ENV["DR_MARIO_MYSQL_PASSWORD"] %>
+  host: <%= ENV["DR_MARIO_MYSQL_HOST"] %>
+  port: <%= ENV["DR_MARIO_MYSQL_PORT"] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
