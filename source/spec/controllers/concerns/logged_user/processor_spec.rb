@@ -111,4 +111,40 @@ describe LoggedUser::Processor do
       it { expect(processor.logged_user).to be_nil }
     end
   end
+
+  describe '#logoff' do
+    let(:session) do
+      create(:session, expiration: expiration, user: user)
+    end
+
+    before do
+      signed_cookies[:session] = session.id
+
+      allow(cookies).to receive(:delete) do |key|
+        signed_cookies.delete(key)
+      end
+    end
+
+    context 'when user is logged with valid session' do
+      let(:expiration) { 2.days.from_now }
+
+      it 'change session expiration' do
+        expect { processor.logoff }
+          .to(change { session.reload.expiration })
+      end
+
+      it 'expires session' do
+        processor.logoff
+
+        expect(session.reload.expiration)
+          .to be < Time.now
+      end
+
+      it 'deletes session cookie' do
+        expect { processor.logoff }
+          .to change { signed_cookies[:session] }
+          .to(nil)
+      end
+    end
+  end
 end

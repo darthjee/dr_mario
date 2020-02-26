@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :login, only: [:create] do
         get '/' => :check, on: :collection
       end
+      delete '/logoff' => 'login#logoff'
     end
   end
 end

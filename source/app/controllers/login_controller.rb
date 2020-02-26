@@ -4,7 +4,7 @@ class LoginController < ApplicationController
   include OnePageApplication
   include LoggedUser
 
-  protect_from_forgery except: [:create]
+  protect_from_forgery except: %i[create logoff]
 
   before_action :save_session, only: :create
   before_action :check_logged!, only: :check
@@ -15,6 +15,10 @@ class LoginController < ApplicationController
 
   def check
     render json: User::Decorator.new(logged_user)
+  end
+
+  def logoff
+    destroy_session
   end
 
   private
