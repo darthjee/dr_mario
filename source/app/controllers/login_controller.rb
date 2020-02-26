@@ -4,7 +4,7 @@ class LoginController < ApplicationController
   include OnePageApplication
   include LoggedUser
 
-  protect_from_forgery except: [:create, :logoff]
+  protect_from_forgery except: %i[create logoff]
 
   before_action :save_session, only: :create
   before_action :check_logged!, only: :check

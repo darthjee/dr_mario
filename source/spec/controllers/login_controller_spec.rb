@@ -187,7 +187,7 @@ describe LoginController do
 
       it 'expires session' do
         expect(session.reload.expiration)
-          .to be < (Time.now)
+          .to be < Time.now
       end
     end
   end
