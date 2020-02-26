@@ -2,12 +2,15 @@
   var app = angular.module('login/controller', [
     'cyberhawk/controller',
     'cyberhawk/notifier',
+    'binded_http'
   ]);
 
 
-  function Controller(http, notifier) {
+  function Controller(http, notifier, bindedHttp) {
     this.http     = http;
     this.notifier = notifier;
+
+    bindedHttp.bind(this);
 
     _.bindAll(this, '_success', '_error');
   }
@@ -47,7 +50,7 @@
   };
 
   app.controller('Login.Controller', [
-    '$http', 'cyberhawk_notifier',
+    '$http', 'cyberhawk_notifier', 'binded_http',
     Controller
   ]);
 }(window._, window.angular, window.$));
