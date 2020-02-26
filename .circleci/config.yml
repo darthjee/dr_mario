@@ -2,20 +2,20 @@ version: 2
 jobs:
   build:
     docker:
-      - image: darthjee/circleci_dr_mario-base:0.0.2
+      - image: darthjee/circleci_dr_mario-base:0.1.0
         environment:
-          DR_MARIO_POSTGRES_HOST: postgres
-          DR_MARIO_POSTGRES_PORT: 5432
-          DR_MARIO_POSTGRES_USER: dr_mario
-          DR_MARIO_POSTGRES_NAME: dr_mario
-          DR_MARIO_POSTGRES_PASSWORD: dr_mario
+          DR_MARIO_MYSQL_HOST: mysql
+          DR_MARIO_MYSQL_PORT: 3306
+          DR_MARIO_MYSQL_USER: dr_mario
+          DR_MARIO_MYSQL_NAME: dr_mario
+          DR_MARIO_MYSQL_PASSWORD: dr_mario
           DR_MARIO_PASSWORD_SALT: abcd
-      - image: circleci/postgres
-        name: postgres
+      - image: circleci/mysql
+        name: mysql
         environment:
-          POSTGRES_USER: dr_mario
-          POSTGRES_PASSWORD: dr_mario
-          POSTGRES_DB: dr_mario_test
+          MYSQL_DATABASE: dr_mario
+          MYSQL_USER: dr_mario
+          MYSQL_PASSWORD: dr_mario
     steps:
       - checkout
       - run:
