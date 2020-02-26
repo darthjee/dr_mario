@@ -5,7 +5,6 @@ services:
     container_name: dr_mario_mysql
     env_file: .env
     environment:
-      MYSQL_ROOT_USER: dr_mario
       MYSQL_ROOT_PASSWORD: dr_mario
     ports:
       - 127.0.0.1:$DR_MARIO_MYSQL_PORT:3306
