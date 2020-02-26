@@ -180,7 +180,7 @@ describe LoginController do
         .from(nil)
     end
 
-    context 'after request' do
+    context 'when the request is finished' do
       before do
         delete :logoff
       end

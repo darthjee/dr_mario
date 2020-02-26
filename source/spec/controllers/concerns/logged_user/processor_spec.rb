@@ -130,7 +130,7 @@ describe LoggedUser::Processor do
 
       it 'change session expiration' do
         expect { processor.logoff }
-          .to change { session.reload.expiration }
+          .to(change { session.reload.expiration })
       end
 
       it 'expires session' do
