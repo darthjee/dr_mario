@@ -10,7 +10,7 @@ jobs:
           DR_MARIO_MYSQL_NAME: dr_mario
           DR_MARIO_MYSQL_PASSWORD: dr_mario
           DR_MARIO_PASSWORD_SALT: abcd
-      - image: circleci/mysql
+      - image: circleci/mysql:5.7
         name: mysql
         environment:
           MYSQL_DATABASE: dr_mario
