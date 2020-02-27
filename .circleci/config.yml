@@ -13,7 +13,7 @@ jobs:
       - image: circleci/mysql:5.7
         name: mysql
         environment:
-          MYSQL_DATABASE: dr_mario
+          MYSQL_DATABASE: dr_mario_test
           MYSQL_USER: dr_mario
           MYSQL_PASSWORD: dr_mario
     steps:
