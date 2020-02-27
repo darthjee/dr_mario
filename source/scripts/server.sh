@@ -1,2 +1,1 @@
-rake db:migrate
-rails c
+rails s
