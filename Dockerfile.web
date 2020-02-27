@@ -9,3 +9,4 @@ USER app
 RUN bundle install --clean --without development test
 
 RUN bower install
+ENTRYPOINT ["rails", "s"]
