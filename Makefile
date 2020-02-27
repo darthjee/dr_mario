@@ -26,7 +26,7 @@ push-base:
 	docker push $(BASE_IMAGE):$(BASE_VERSION)
 
 build:
-	docker build -f Dockerfile . -t $(IMAGE)
+	docker build -f Dockerfile . -t $(IMAGE) -t $(PUSH_IMAGE) -t $(PUSH_IMAGE):$(BASE_VERSION)
 
 push:
 	make build
