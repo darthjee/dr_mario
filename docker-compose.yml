@@ -58,3 +58,4 @@ services:
     image: darthjee/production_dr_mario:latest
     environment:
       RAILS_ENV: production
+      PORT: 80
