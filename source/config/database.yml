@@ -20,7 +20,7 @@ test_readonly:
 
 production: &production
   <<: *development
-  username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSWORD'] %>
-  host: <%= ENV['DB_HOST'] %>
-  database: <%= ENV['DB_DATABASE'] %>
+  username: <%= ENV["DR_MARIO_MYSQL_USER"] %>
+  password: <%= ENV["DR_MARIO_MYSQL_PASSWORD"] %>
+  host: <%= ENV["DR_MARIO_MYSQL_HOST"] %>
+  port: <%= ENV["DR_MARIO_MYSQL_PORT"] %>
