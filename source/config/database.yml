@@ -13,7 +13,7 @@ development: &development
 # Do not set this db to the same as development or production.
 test: &test
   <<: *development
-  database: <%= ENV["DR_MARIO_MYSQL_NAME"] %>_development
+  database: <%= ENV["DR_MARIO_MYSQL_NAME"] %>_test
 
 test_readonly:
   <<: *test
