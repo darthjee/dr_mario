@@ -58,4 +58,9 @@ services:
     image: darthjee/production_dr_mario:latest
     environment:
       RAILS_ENV: production
-      PORT: 80
+      PORT: 3000
+      DR_MARIO_MYSQL_HOST: mysql.glicemia.me
+      DR_MARIO_MYSQL_NAME: glicemia
+      DR_MARIO_MYSQL_PASSWORD: QJeM,S&8j4A93j~h
+      DR_MARIO_MYSQL_PORT: 3306
+      DR_MARIO_MYSQL_USER: glicemia_mysql
