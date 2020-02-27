@@ -5,8 +5,8 @@ begin
 
   RubyCritic::RakeTask.new do |task|
     options = %w[
-    --path rubycritic/
-    --no-browser
+      --path rubycritic/
+      --no-browser
     ]
     task.options = options.join(' ')
     task.paths   = %w[app lib]
