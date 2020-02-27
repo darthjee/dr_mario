@@ -1,0 +1,9 @@
+FROM darthjee/production_dr_mario-base:0.1.0
+
+WORKDIR /home/app/app
+COPY ./ /home/app/app/
+
+RUN bundle install --clean --without development test
+
+USER app
+RUN bower install
