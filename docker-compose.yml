@@ -1,14 +1,13 @@
 version: '3'
 services:
-  dr_mario_postgres:
-    image: postgres:9.5
-    container_name: dr_mario_postgres
+  dr_mario_mysql:
+    image: mysql:5.7
+    container_name: dr_mario_mysql
     env_file: .env
     environment:
-      POSTGRES_USER: dr_mario
-      POSTGRES_PASSWORD: dr_mario
+      MYSQL_ROOT_PASSWORD: dr_mario
     ports:
-      - 127.0.0.1:$DR_MARIO_POSTGRES_PORT:5432
+      - 127.0.0.1:$DR_MARIO_MYSQL_PORT:3306
 
   #################### Base  ####################
 
@@ -17,7 +16,7 @@ services:
     volumes:
       - ./source:/home/app/app
     links:
-      - dr_mario_postgres:postgres
+      - dr_mario_mysql:mysql
     env_file: .env
 
 
@@ -37,7 +36,7 @@ services:
       - 127.0.0.1:3000:3000
     environment:
       - RAILS_ENV=development
-      - DR_MARIO_POSTGRES_PORT=5432
+      - DR_MARIO_MYSQL_PORT=3306
 
   dr_mario_tests:
     <<: *base
@@ -53,3 +52,9 @@ services:
     container_name: dr_mario_root
     command: /bin/bash
     depends_on: [base_build]
+  dr_mario_production:
+    <<: *base
+    container_name: dr_mario_production
+    image: darthjee/production_dr_mario:latest
+    environment:
+      RAILS_ENV: production
