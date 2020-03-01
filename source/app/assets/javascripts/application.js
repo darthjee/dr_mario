@@ -22,6 +22,7 @@
 //= require cyberhawk/cyberhawk
 //= require querystring
 //= require bootstrap
+//= require_tree ./utils
 //= require modules/dr_mario
 //= require_tree ./modules
 //= require rails-ujs
