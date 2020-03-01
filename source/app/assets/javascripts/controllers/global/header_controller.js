@@ -1,6 +1,7 @@
 (function(_, angular, Global) {
   var app = angular.module('global/header_controller', [
     'cyberhawk/notifier',
+    'binded_http'
   ]);
 
   function Controller(http, notifier, timeout) {
@@ -16,8 +17,9 @@
   var fn = Controller.prototype;
 
   fn.logoff = function() {
-    console.info('logoff');
-    this.http.delete('/users/logoff').success(this._completeLogoff);
+    this.http
+      .delete('/users/logoff')
+      .success(this._completeLogoff);
   };
 
   fn._listen = function() {
@@ -43,7 +45,7 @@
   };
 
   app.controller('Global.HeaderController', [
-    '$http', 'cyberhawk_notifier', '$timeout',
+    'binded_http', 'cyberhawk_notifier', '$timeout',
     Controller
   ]);
 

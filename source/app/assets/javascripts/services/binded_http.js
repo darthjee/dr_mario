@@ -12,7 +12,9 @@
     }
   }
 
-  _.delegate(BindedHttpService, 'http', 'get', 'post');
+  _.delegate(
+    BindedHttpService, 'http', 'get', 'post', 'delete'
+  );
 
   function BindedHttpServiceFactory($http) {
     return new BindedHttpService($http);
