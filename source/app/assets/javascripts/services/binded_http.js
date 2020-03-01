@@ -8,8 +8,11 @@
 
     bind(controller) {
       this.controller = controller;
+      return this;
     }
   }
+
+  _.delegate(BindedHttpService, 'http', 'get', 'post');
 
   function BindedHttpServiceFactory($http) {
     return new BindedHttpService($http);

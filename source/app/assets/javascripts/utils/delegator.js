@@ -10,14 +10,14 @@
       var objectName = this.objectName;
 
       this.caller.prototype[method] = function() {
-        return this[objectName][method](arguments);
+        var object = this[objectName]
+        return object[method].apply(object, arguments);
       };
     };
   }
 
   _.delegate = function(caller, object) {
     var methods = [].slice.call(arguments, 2),
-      fn =  caller.prototype,
       delegator = new Delegator(caller, object);
 
     _.each(methods, delegator.delegate);
@@ -27,10 +27,4 @@
   function T(obj) {
     this.obj = obj;
   }
-
-  _.delegate(T, 'obj', 'a');
-
-  t = new T({ a: function() { return 1 } });
-
-  console.info(t.a());
 })(window._);
