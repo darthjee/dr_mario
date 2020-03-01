@@ -1,17 +1,24 @@
 (function(_, angular) {
   var module = angular.module('binded_http', []);
 
-  function BindedHttpServiceFactory() {
-    return new BindedHttpService();
-  }
-
   class BindedHttpService {
-    bind: function(controller) {
+    constructor($http) {
+      this.http = $http;
+    }
+
+    bind(controller) {
       this.controller = controller;
     }
   }
 
-  module.service('binded_http', [BindedHttpServiceFactory])
+  function BindedHttpServiceFactory($http) {
+    return new BindedHttpService($http);
+  }
+
+  module.service('binded_http', [
+    '$http',
+    BindedHttpServiceFactory
+  ])
 }(window._, window.angular));
 
 
