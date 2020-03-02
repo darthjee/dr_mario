@@ -21,10 +21,5 @@
       delegator = new Delegator(caller, object);
 
     _.each(methods, delegator.delegate);
-
-  }
-
-  function T(obj) {
-    this.obj = obj;
   }
 })(window._);
