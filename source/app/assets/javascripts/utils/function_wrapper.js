@@ -34,4 +34,13 @@
 
     object[method] = wrapper.wrap(bindArguments);
   };
+
+  _.wrapFunctions = function(object, methods, bindArguments) {
+    for (method in methods) {
+      var wrapper = methods[method],
+        wrapper = new FunctionWrapper(object, method, wrapper);
+
+      object[method] = wrapper.wrap(bindArguments);
+    }
+  };
 })(window._);

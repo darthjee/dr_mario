@@ -16,10 +16,11 @@
     BindedHttpService, 'http', 'get', 'post', 'delete'
   );
 
-  _.wrapFunction(
-    BindedHttpService.prototype,
-    'post', function(original) {
-      return original();
+  _.wrapFunctions(
+    BindedHttpService.prototype, {
+      post: function(original) {
+        return original();
+      }
     },
     true
   );
