@@ -16,13 +16,14 @@
     BindedHttpService, 'http', 'get', 'post', 'delete'
   );
 
+  var middleware = {
+    post: function(original) {
+      return original();
+    }
+  };
+
   _.wrapFunctions(
-    BindedHttpService.prototype, {
-      post: function(original) {
-        return original();
-      }
-    },
-    true
+    BindedHttpService.prototype, middleware, true
   );
 
   function BindedHttpServiceFactory($http) {
