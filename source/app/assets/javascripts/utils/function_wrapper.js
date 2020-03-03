@@ -1,13 +1,13 @@
 (function(_) {
   class FunctionWrapper {
     constructor(object, method, wrapper) {
-      this.object = object
-      this.method = method
-      this.wrapper = wrapper
-      this.original = object[method]
+      this.object = object;
+      this.method = method;
+      this.wrapper = wrapper;
+      this.original = object[method];
     }
 
-    build() {
+    wrap() {
       var that = this;
       
       return function() {
@@ -17,27 +17,45 @@
         return that.wrapper.apply(this, args);
       };
     }
+
+    bindedWrap() {
+      var that = this;
+      
+      return function() {
+        var binded = that._bind(that.original, this, arguments)
+        var args = [binded].concat([].slice.call(arguments, 0));
+
+        return that.wrapper.apply(this, args);
+      };
+    }
+
+    _bind(func, caller, args) {
+      return function() {
+        return func.apply(caller, args);
+      };
+    }
   }
 
   _.functionWrapper = function(object, method, wrapper) {
     var wrapper = new FunctionWrapper(object, method, wrapper);
 
-    object[method] = wrapper.build();
+    object[method] = wrapper.bindedWrap();
   };
 
   class T {
     m() {
       console.info('m');
-      return [this, arguments];
+      console.info(arguments);
+      return this;
     }
   }
 
   var t = new T();
 
-  _.functionWrapper(t, 'm', function(o, a, b) {
+  _.functionWrapper(t, 'm', function(o) {
     console.info(arguments);
     console.info('before');
-    var r = o(a,b);
+    var r = o();
     console.info('after');
     return r;
   });
