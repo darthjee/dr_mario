@@ -16,13 +16,16 @@
     BindedHttpService, 'http', 'get', 'post', 'delete'
   );
 
+
+  function watch(original) {
+    this.controller.initRequest();
+    var promisse = original()
+    promisse.finally(this.controller.finishRequest);
+    return promisse;
+  }
+
   var middleware = {
-    post: function(original) {
-      this.controller.initRequest();
-      var promisse = original()
-      promisse.finally(this.controller.finishRequest);
-      return promisse;
-    }
+    post: watch
   };
 
   _.wrapFunctions(
