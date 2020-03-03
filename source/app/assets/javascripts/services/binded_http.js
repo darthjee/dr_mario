@@ -18,7 +18,10 @@
 
   var middleware = {
     post: function(original) {
-      return original();
+      this.controller.initRequest();
+      var promisse = original()
+      promisse.finally(this.controller.finishRequest);
+      return promisse;
     }
   };
 

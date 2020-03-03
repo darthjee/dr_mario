@@ -10,7 +10,7 @@
     this.http     = bindedHttp.bind(this);
     this.notifier = notifier;
 
-    _.bindAll(this, '_success', '_error');
+    _.bindAll(this, 'finishRequest', '_success', '_error');
   }
 
   var fn = Controller.prototype;
@@ -45,6 +45,14 @@
     } else {
       this.error = true
     }
+  };
+
+  fn.initRequest = function() {
+    this.ongoing = true;
+  };
+
+  fn.finishRequest = function() {
+    this.ongoing = false;
   };
 
   app.controller('Login.Controller', [
