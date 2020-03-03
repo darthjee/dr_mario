@@ -29,29 +29,9 @@
     }
   }
 
-  _.functionWrapper = function(object, method, wrapper) {
+  _.wrapFunction = function(object, method, wrapper, bindArguments) {
     var wrapper = new FunctionWrapper(object, method, wrapper);
 
-    object[method] = wrapper.wrap();
+    object[method] = wrapper.wrap(bindArguments);
   };
-
-  class T {
-    m() {
-      console.info('m');
-      console.info(arguments);
-      return this;
-    }
-  }
-
-  var t = new T();
-
-  _.functionWrapper(t, 'm', function(o, a, b) {
-    console.info(arguments);
-    console.info('before');
-    var r = o(a, b, 3);
-    console.info('after');
-    return r;
-  });
-
-  console.info('call', t.m(1,2));
 })(window._);

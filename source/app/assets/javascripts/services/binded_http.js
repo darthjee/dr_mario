@@ -16,6 +16,14 @@
     BindedHttpService, 'http', 'get', 'post', 'delete'
   );
 
+  _.wrapFunction(
+    BindedHttpService.prototype,
+    'post', function(original) {
+      return original();
+    },
+    true
+  );
+
   function BindedHttpServiceFactory($http) {
     return new BindedHttpService($http);
   }
