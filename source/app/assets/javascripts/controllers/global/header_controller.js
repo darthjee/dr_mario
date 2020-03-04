@@ -9,7 +9,7 @@
     this.notifier = notifier;
     this.timeout = timeout;
 
-    _.bindAll(this, '_login', '_completeLogoff');
+    _.bindAll(this, 'finishRequest', '_login', '_completeLogoff');
     this._listen();
     this._checkLogin();
   }
