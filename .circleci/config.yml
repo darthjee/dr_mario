@@ -28,20 +28,20 @@ jobs:
           name: Bundle Install
           command: bundle install
       - run:
+          name: Bower Install
+          command: bundle exec rake bower:install
+      - run:
+          name: Rubocop
+          command: rubocop
+      - run:
           name: Wait for database
           command: scripts/wait_for_db.sh
       - run:
           name: Migrate
           command: RAILS_ENV=test bundle exec rake db:schema:load
       - run:
-          name: Bower Install
-          command: bundle exec rake bower:install
-      - run:
           name: RSpec
           command: bundle exec rspec
-      - run:
-          name: Rubocop
-          command: rubocop
       - run:
           name: Coverage Test Report
           command: cc-test-reporter after-build --exit-code $?
