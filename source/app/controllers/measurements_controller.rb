@@ -15,7 +15,7 @@ class MeasurementsController < ApplicationController
   private
 
   def measurements
-    @measurements ||= user.measurements
+    @measurements ||= user.measurements.order(date: :desc, time: :desc)
   end
 
   def user

@@ -2,14 +2,15 @@
   var app = angular.module('login/controller', [
     'cyberhawk/controller',
     'cyberhawk/notifier',
+    'binded_http'
   ]);
 
 
-  function Controller(http, notifier) {
-    this.http     = http;
+  function Controller(bindedHttp, notifier) {
+    this.http     = bindedHttp.bind(this);
     this.notifier = notifier;
 
-    _.bindAll(this, '_success', '_error');
+    _.bindAll(this, 'finishRequest', '_success', '_error');
   }
 
   var fn = Controller.prototype;
@@ -46,8 +47,17 @@
     }
   };
 
+  fn.initRequest = function() {
+    this.ongoing = true;
+  };
+
+  fn.finishRequest = function() {
+    this.ongoing = false;
+  };
+
   app.controller('Login.Controller', [
-    '$http', 'cyberhawk_notifier',
+    'binded_http',
+    'cyberhawk_notifier',
     Controller
   ]);
 }(window._, window.angular, window.$));
