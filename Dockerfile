@@ -1,4 +1,4 @@
-FROM darthjee/dr_mario-base:0.1.0
+FROM darthjee/dr_mario-base:0.1.1
 
 WORKDIR /home/app/app
 COPY --chown=app:app source/Gemfile* /home/app/app/
