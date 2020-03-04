@@ -25,7 +25,9 @@
   }
 
   var middleware = {
-    post: watch
+    post: watch,
+    get: watch,
+    delete: watch
   };
 
   _.wrapFunctions(

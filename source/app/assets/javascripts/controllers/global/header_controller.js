@@ -5,7 +5,7 @@
   ]);
 
   function Controller(http, notifier, timeout) {
-    this.http = http;
+    this.http = http.bind(this);
     this.notifier = notifier;
     this.timeout = timeout;
 
@@ -42,6 +42,14 @@
       that.user = user;
       that.logged = true;
     }, 1);
+  };
+
+  fn.initRequest = function() {
+    this.ongoing = true;
+  };
+
+  fn.finishRequest = function() {
+    this.ongoing = false;
   };
 
   app.controller('Global.HeaderController', [
