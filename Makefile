@@ -14,7 +14,6 @@ all:
 build-base:
 	docker tag $(BASE_IMAGE):latest $(BASE_IMAGE):cached; \
 	docker rmi $(BASE_IMAGE):latest; \
-	docker pull $(BASE_IMAGE):latest; \
 	docker build -f $(DOCKER_FILE_BASE) . -t $(BASE_IMAGE):latest -t $(BASE_IMAGE):$(BASE_VERSION); \
 	if (docker images | grep $(BASE_IMAGE) | grep cached); then \
 	  docker rmi $(BASE_IMAGE):cached; \
