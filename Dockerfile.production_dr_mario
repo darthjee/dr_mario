@@ -2,7 +2,7 @@ FROM darthjee/production_dr_mario-base:0.1.1
 
 USER root
 WORKDIR /home/app/app
-COPY ./ /home/app/app/
+COPY ./source/ /home/app/app/
 RUN chown app.app /home/app/app -R
 
 USER app
