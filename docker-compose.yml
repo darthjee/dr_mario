@@ -22,7 +22,9 @@ services:
 
   base_build:
     <<: *base
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dr_mario
     command: echo done
 
   #################### CONTAINERS ####################
