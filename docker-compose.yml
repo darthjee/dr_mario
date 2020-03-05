@@ -64,8 +64,9 @@ services:
     user: root
     container_name: dr_mario_root
     command: /bin/bash
-    depends_on: [production_base_build]
+    depends_on: [base_build]
   dr_mario_production:
+    depends_on: [production_base_build, dr_mario_mysql]
     container_name: dr_mario_production
     image: darthjee/production_dr_mario
     links:
