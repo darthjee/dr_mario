@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: darthjee/circleci_dr_mario-base:0.1.0
+      - image: darthjee/circleci_dr_mario-base:0.1.1
         environment:
           DR_MARIO_MYSQL_HOST: mysql
           DR_MARIO_MYSQL_PORT: 3306
@@ -28,20 +28,20 @@ jobs:
           name: Bundle Install
           command: bundle install
       - run:
+          name: Bower Install
+          command: bundle exec rake bower:install
+      - run:
+          name: Rubocop
+          command: rubocop
+      - run:
           name: Wait for database
           command: scripts/wait_for_db.sh
       - run:
           name: Migrate
           command: RAILS_ENV=test bundle exec rake db:schema:load
       - run:
-          name: Bower Install
-          command: bundle exec rake bower:install
-      - run:
           name: RSpec
           command: bundle exec rspec
-      - run:
-          name: Rubocop
-          command: rubocop
       - run:
           name: Coverage Test Report
           command: cc-test-reporter after-build --exit-code $?

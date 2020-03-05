@@ -1,6 +1,6 @@
 PROJECT?=dr_mario
 IMAGE?=$(PROJECT)
-BASE_VERSION?=0.1.0
+BASE_VERSION?=0.1.1
 BASE_IMAGE?=$(DOCKER_ID_USER)/$(PROJECT)-base
 PUSH_IMAGE=$(DOCKER_ID_USER)/$(PROJECT)
 DOCKER_FILE_BASE=Dockerfile.$(PROJECT)-base
@@ -26,7 +26,7 @@ push-base:
 	docker push $(BASE_IMAGE):$(BASE_VERSION)
 
 build:
-	docker build -f Dockerfile . -t $(IMAGE) -t $(PUSH_IMAGE) -t $(PUSH_IMAGE):$(BASE_VERSION)
+	docker build -f Dockerfile.$(PROJECT) . -t $(IMAGE) -t $(PUSH_IMAGE) -t $(PUSH_IMAGE):$(BASE_VERSION)
 
 push:
 	make build
