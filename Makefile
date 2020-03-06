@@ -31,3 +31,6 @@ push:
 	make build
 	docker push $(PUSH_IMAGE)
 	docker push $(PUSH_IMAGE):$(BASE_VERSION)
+
+build-heroku:
+	docker build -f Dockerfile.web . -t registry.heroku.com/$(PROJECT)/web
