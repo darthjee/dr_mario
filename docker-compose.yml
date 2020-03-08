@@ -12,7 +12,7 @@ services:
   #################### Base  ####################
 
   base: &base
-    image: dr_mario
+    image: darthjee/dr_mario
     volumes:
       - ./source:/home/app/app
     links:
@@ -27,6 +27,17 @@ services:
       dockerfile: Dockerfile.dr_mario
     command: echo done
 
+  production_base_build:
+    image: darthjee/production_dr_mario
+    env_file: .env
+    environment:
+      RAILS_ENV: production
+    build:
+      context: .
+      dockerfile: Dockerfile.production_dr_mario
+    links:
+      - dr_mario_mysql:mysql
+    command: echo done
   #################### CONTAINERS ####################
 
   dr_mario_app:
@@ -55,8 +66,11 @@ services:
     command: /bin/bash
     depends_on: [base_build]
   dr_mario_production:
-    <<: *base
+    depends_on: [production_base_build, dr_mario_mysql]
     container_name: dr_mario_production
-    image: darthjee/production_dr_mario:latest
+    image: darthjee/production_dr_mario
+    links:
+      - dr_mario_mysql:mysql
+    env_file: .env
     environment:
       RAILS_ENV: production
