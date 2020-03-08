@@ -34,3 +34,7 @@ push:
 
 build-heroku:
 	docker build -f Dockerfile.web . -t registry.heroku.com/$(PROJECT)/web
+
+release:
+	heroku container:push --recursive web
+	heroku container:release web
