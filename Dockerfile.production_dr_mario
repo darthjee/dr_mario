@@ -1,12 +1,10 @@
 FROM darthjee/production_dr_mario-base:0.1.1
 
-COPY --chown=app:app ./source/ /home/app/app/
+COPY ./source/ /home/app/app/
 
 RUN bundle install --clean --without development test
 
-RUN bower install
+RUN bower install --allow-root
 
 RUN rm /home/app/app/tmp/pids/server.pid /home/app/app/public/assets/* -f
 RUN RAILS_ENV=production rails assets:precompile
-
-USER root
