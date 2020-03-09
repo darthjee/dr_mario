@@ -1,7 +1,7 @@
 development: &development
   adapter: mysql2
   encoding: utf8
-  database: <%= ENV["DR_MARIO_MYSQL_NAME"] %>_development
+  database: <%= ENV["DR_MARIO_MYSQL_NAME"] %>
   pool: 5
   username: <%= ENV["DR_MARIO_MYSQL_USER"] %>
   password: <%= ENV["DR_MARIO_MYSQL_PASSWORD"] %>
