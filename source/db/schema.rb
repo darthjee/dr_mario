@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_130445) do
+ActiveRecord::Schema.define(version: 2020_03_09_122444) do
 
   create_table "measurements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "glicemy", limit: 1, null: false
+    t.integer "glicemy", limit: 2, null: false
     t.date "date", null: false
     t.time "time", null: false
     t.datetime "created_at", null: false
