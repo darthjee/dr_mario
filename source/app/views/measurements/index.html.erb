@@ -10,8 +10,8 @@
     <tr ng-repeat="measurement in mc.data"
         ng-class="measurement.odd ? 'info' : ''">
       <td>{{measurement.glicemy}}</td>
-      <td>{{measurement.date}}</td>
-      <td>{{measurement.time}}</td>
+      <td>{{measurement.date | date}}</td>
+      <td>{{measurement.time | time}}</td>
     </tr>
     </body>
 </table>
