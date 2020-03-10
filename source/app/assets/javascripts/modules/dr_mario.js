@@ -5,7 +5,8 @@
     'kanto',
     'home',
     'measurement',
-    'login'
+    'login',
+    'filters/time'
   ]);
 
   module.config(['$httpProvider', function($httpProvider) {
