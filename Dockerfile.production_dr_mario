@@ -1,10 +1,21 @@
-FROM darthjee/production_dr_mario-base:0.1.1
+FROM darthjee/production_dr_mario-base:0.2.0 as base
 
-COPY ./source/ /home/app/app/
+####################################
+
+FROM base as builder
+
+COPY --chown=app:app ./source/ /home/app/app/
+
+RUN bundle install --clean --without development test;
+
+RUN rm /home/app/app/tmp/pids/server.pid /home/app/app/public/assets/* -f; \
+    bower install; \
+    RAILS_ENV=production rails assets:precompile
+
+##################################
+
+FROM base
+
+COPY --chown=app:app --from=builder /home/app/app/ /home/app/app/
 
 RUN bundle install --clean --without development test
-
-RUN bower install --allow-root
-
-RUN rm /home/app/app/tmp/pids/server.pid /home/app/app/public/assets/* -f
-RUN RAILS_ENV=production rails assets:precompile
