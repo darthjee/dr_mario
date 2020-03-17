@@ -12,7 +12,7 @@ describe MeasurementsController do
   describe 'GET new' do
     render_views
 
-    context 'when requesting html and ajax is true' do
+    context 'when requesting html and ajax is true', :cached do
       before do
         get :new, params: { user_id: user_id, format: :html, ajax: true }
       end
@@ -32,7 +32,7 @@ describe MeasurementsController do
       end
     end
 
-    context 'when requesting json' do
+    context 'when requesting json', :not_cached do
       let(:expected_object) { user.measurements.new }
 
       before do
@@ -52,7 +52,7 @@ describe MeasurementsController do
 
     before { create_list(:measurement, 1, user: user) }
 
-    context 'when requesting json' do
+    context 'when requesting json', :not_cached do
       let(:expected_object) { Measurement.all }
 
       before do
@@ -66,7 +66,7 @@ describe MeasurementsController do
       end
     end
 
-    context 'when requesting html and ajax is true' do
+    context 'when requesting html and ajax is true', :cached do
       before do
         get :index, params: { user_id: user_id, format: :html, ajax: true }
       end
@@ -109,7 +109,7 @@ describe MeasurementsController do
       end
     end
 
-    context 'when requesting html and ajax is true' do
+    context 'when requesting html and ajax is true', :cached do
       let(:parameters) do
         { id: :id, user_id: user_id, format: :html, ajax: true }
       end
@@ -139,7 +139,7 @@ describe MeasurementsController do
       cookies.signed[:session] = session.id
     end
 
-    context 'when requesting json format and user is not logged' do
+    context 'when reque ting json format and user is not logged' do
       let(:parameters) do
         { user_id: user_id, format: :json, measurement: payload }
       end
