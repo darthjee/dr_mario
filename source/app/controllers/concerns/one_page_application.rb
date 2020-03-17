@@ -43,6 +43,7 @@ module OnePageApplication
 
   def cache_control
     return unless html?
+
     headers['Cache-Control'] = "max-age=#{Settings.cache_age}"
   end
 end

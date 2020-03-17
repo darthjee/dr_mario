@@ -9,11 +9,16 @@ user.save
   next if user.measurements.where(date: day).any?
 
   3.times.each do |hour|
-    time = "%d:%02d:%02d" % [Random.rand(2) + 6 + 4 * hour, Random.rand(60), Random.rand(60)]
+    time = format(
+      '%<hour>d:%<minutes>02d:%<seconds>02d',
+      hours: Random.rand(6..7) + 4 * hour,
+      minutes: Random.rand(60),
+      seconds: Random.rand(60)
+    )
 
     user.measurements.where(date: day).create(
       time: time,
-      glicemy: Random.rand(100) + 50
+      glicemy: Random.rand(50..149)
     )
   end
 end
