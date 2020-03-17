@@ -3,7 +3,7 @@
 shared_examples 'a request cached', cached: true do
   it 'sets cache' do
     expect(response.headers['Cache-Control'])
-      .to eq("max-age=#{Settings.cache_age}, private")
+      .to eq("max-age=#{Settings.cache_age}, public")
   end
 end
 
