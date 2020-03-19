@@ -10,7 +10,7 @@ user.save
 
   3.times.each do |hour|
     time = format(
-      '%<hour>d:%<minutes>02d:%<seconds>02d',
+      '%<hours>d:%<minutes>02d:%<seconds>02d',
       hours: Random.rand(6..7) + 4 * hour,
       minutes: Random.rand(60),
       seconds: Random.rand(60)
