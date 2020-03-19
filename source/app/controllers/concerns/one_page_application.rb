@@ -5,7 +5,8 @@ module OnePageApplication
   include Tarquinn
 
   included do
-    before_action :cache_control
+    after_action  :cache_control
+
     layout :layout_for_page
     redirection_rule :render_root, :perform_angular_redirect?
     skip_redirection_rule :render_root, :ajax?, :home?
@@ -45,5 +46,6 @@ module OnePageApplication
     return unless html?
 
     headers['Cache-Control'] = "max-age=#{Settings.cache_age}, public"
+    request.session_options[:skip] = true
   end
 end
