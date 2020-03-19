@@ -5,7 +5,7 @@ module OnePageApplication
   include Tarquinn
 
   included do
-    after_action  :cache_control
+    after_action :cache_control
 
     layout :layout_for_page
     redirection_rule :render_root, :perform_angular_redirect?
