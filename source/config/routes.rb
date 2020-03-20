@@ -3,8 +3,8 @@
 Rails.application.routes.draw do
   get '/' => 'home#show', as: :home
 
-  resources :users, only: [] do
-    resources :measurements, only: %i[index show create new]
+  resources :users, only: [:index] do
+    resources :measurements, only: %i[index create new]
 
     collection do
       resources :login, only: [:create] do

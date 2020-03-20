@@ -2,6 +2,8 @@
 
 class User < ApplicationRecord
   class Decorator < Azeroth::Decorator
+    expose :id
+    expose :name
     expose :email
     expose :login
 

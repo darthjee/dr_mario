@@ -6,7 +6,8 @@
     'home',
     'measurement',
     'login',
-    'filters/time'
+    'filters/time',
+    'users/controller'
   ]);
 
   module.config(['$httpProvider', function($httpProvider) {
