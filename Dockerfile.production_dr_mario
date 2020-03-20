@@ -8,9 +8,12 @@ COPY --chown=app:app ./source/ /home/app/app/
 
 RUN bundle install --clean --without development test;
 
-RUN rm /home/app/app/tmp/pids/server.pid /home/app/app/public/assets/* -f; \
-    bower install; \
-    RAILS_ENV=production rails assets:precompile
+RUN rm /home/app/app/tmp/pids/server.pid -f
+RUN rm /home/app/app/public/assets/* -f
+RUN rm /home/app/specs -rf
+RUN rm /home/app/log/* -f
+RUN bower install;
+RUN RAILS_ENV=production rails assets:precompile
 
 ##################################
 
