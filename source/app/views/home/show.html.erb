@@ -1,4 +1,4 @@
-<div class="row"i ng-controller="User.Controller as userController">
+<div class="row"i ng-controller="User.Controller as usersController">
   <div class="col-md-3 col-sm-12">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -6,8 +6,10 @@
       </div>
       <div class="panel-body">
         <ul class="list-group">
-          <li class="list-group-item">
-            <a href="#/users/:user_id/measurements">User Name</a>
+          <li class="list-group-item" ng-repeat="user in usersController.users">
+            <%= angular_safe_link_to(:user_measurements, user_id: "{{user.id}}") do %>
+              {{user.name}}</a>
+            <% end %>
           </li>
         </ul>
       </div>
