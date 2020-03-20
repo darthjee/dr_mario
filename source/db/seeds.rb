@@ -104,3 +104,12 @@ Seed::User.populate(
     password: 'pass'
   }
 )
+
+Seed::User.populate(
+  user: {
+    name: 'Other User',
+    login: 'other_user',
+    email: 'email2@srv.com',
+    password: 'password'
+  }
+)
