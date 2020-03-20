@@ -10,7 +10,7 @@ RUN bundle install --clean --without development test;
 
 RUN rm /home/app/app/tmp/pids/server.pid -f
 RUN rm /home/app/app/public/assets/* -f
-RUN rm /home/app/specs -rf
+RUN rm /home/app/spec -rf
 RUN bower install;
 RUN RAILS_ENV=production rails assets:precompile
 RUN rm /home/app/assets -rf
