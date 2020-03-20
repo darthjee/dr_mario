@@ -73,5 +73,5 @@ class UserPopulator
 end
 
 UserPopulator.populate(
-  user: { name: 'User Name', login: 'user', email: 'email@srv.com', password: 'pass'}
+  user: { name: 'User Name', login: 'user', email: 'email@srv.com', password: 'pass' }
 )
