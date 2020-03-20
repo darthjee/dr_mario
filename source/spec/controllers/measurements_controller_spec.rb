@@ -85,53 +85,6 @@ describe MeasurementsController do
     end
   end
 
-  describe 'GET show' do
-    render_views
-
-    let(:measurement)    { create(:measurement, user: user) }
-    let(:measurement_id) { measurement.id }
-
-    context 'when requesting json' do
-      let(:parameters) do
-        { id: measurement_id, user_id: user_id, format: :json }
-      end
-
-      let(:expected_object) { measurement }
-
-      before do
-        get :show, params: parameters
-      end
-
-      it { expect(response).to be_successful }
-
-      it 'returns measurements serialized' do
-        expect(response.body).to eq(expected_json)
-      end
-    end
-
-    context 'when requesting html and ajax is true', :cached do
-      let(:parameters) do
-        { id: :id, user_id: user_id, format: :html, ajax: true }
-      end
-
-      before { get :show, params: parameters }
-
-      it { expect(response).to be_successful }
-
-      it { expect(response).to render_template('measurements/show') }
-    end
-
-    context 'when requesting html and ajax is false' do
-      before do
-        get :show, params: { user_id: user_id, id: :id }
-      end
-
-      it do
-        expect(response).to redirect_to("#/users/#{user_id}/measurements/id")
-      end
-    end
-  end
-
   describe 'POST create' do
     let(:session) { create(:session, user: user) }
 
