@@ -11,6 +11,8 @@ describe User::Decorator do
   describe '#as_json' do
     let(:expected_json) do
       {
+        id: user.id,
+        name: user.name,
         login: user.login,
         email: user.email
       }.stringify_keys
@@ -26,6 +28,8 @@ describe User::Decorator do
       let(:expected_json) do
         [
           {
+            id: user.id,
+            name: user.name,
             login: user.login,
             email: user.email
           }
@@ -42,6 +46,8 @@ describe User::Decorator do
 
       let(:expected_json) do
         {
+          id: user.id,
+          name: user.name,
           login: user.login,
           email: user.email,
           errors: {
