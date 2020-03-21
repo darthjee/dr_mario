@@ -1,7 +1,10 @@
 {
   "name": "dr_mario",
   "private": true,
-  "dependencies": {},
+  "version": "1.0.0",
+  "dependencies": {
+    "package.json": "^2.0.1"
+  },
   "devDependencies": {
     "bower": "^1.8.8",
     "karma": "^4.4.1",
