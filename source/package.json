@@ -1,5 +1,9 @@
 {
   "name": "dr_mario",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.8.8",
+    "karma-jasmine": "^3.1.1"
+  }
 }
