@@ -19,12 +19,26 @@ services:
       - dr_mario_mysql:mysql
     env_file: .env
 
+  tests_base: &tests_base
+    <<: *base
+    image: darthjee/tests_dr_mario
+    links:
+      - dr_mario_mysql:mysql
+    env_file: .env
 
   base_build:
     <<: *base
     build:
       context: .
       dockerfile: Dockerfile.dr_mario
+    command: echo done
+
+  tests_build:
+    <<: *tests_base
+    build:
+      context: .
+      dockerfile: Dockerfile.tests_dr_mario
+    depends_on: [base_build]
     command: echo done
 
   production_base_build:
@@ -52,10 +66,10 @@ services:
       - DR_MARIO_MYSQL_PORT=3306
 
   dr_mario_tests:
-    <<: *base
+    <<: *tests_base
     container_name: dr_mario_tests
     command: /bin/bash bin/tests.sh
-    depends_on: [base_build]
+    depends_on: [tests_build]
     environment:
       - RAILS_ENV=test
 

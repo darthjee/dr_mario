@@ -1,0 +1,9 @@
+FROM darthjee/dr_mario:0.2.1 as base
+
+ADD source/package.json /home/app/app/
+
+USER root
+RUN npm install -g \
+      $(cat package.json | grep '^    "' | grep -v package | sed -e 's/"\(.*\)": *"[^0-9]*\([0-9].*\)".*/\1@\2/g')
+
+USER app
